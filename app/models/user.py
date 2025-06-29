@@ -21,6 +21,9 @@ class User(db.Model):
     assignments = db.relationship('Assignment', backref='user', lazy='dynamic', cascade='all, delete-orphan')
     sessions = db.relationship('Session', backref='user', lazy='dynamic', cascade='all, delete-orphan')
     nutrition_goals = db.relationship('NutritionGoal', backref='user', lazy='dynamic', cascade='all, delete-orphan')
+    workouts_created = db.relationship('Workout', backref='creator', foreign_keys='Workout.created_by', lazy='dynamic')
+    workout_assignments = db.relationship('WorkoutAssignment', foreign_keys='WorkoutAssignment.user_id', backref='assignee', lazy='dynamic')
+    workout_sessions = db.relationship('WorkoutSession', backref='user', lazy='dynamic')
     
     @property
     def password(self):

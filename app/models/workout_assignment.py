@@ -1,0 +1,51 @@
+# app/models/workout_assignment.py
+from app import db
+from datetime import datetime
+
+class WorkoutAssignment(db.Model):
+    __tablename__ = 'workout_assignments'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'), nullable=False)
+    assigned_at = db.Column(db.DateTime, default=datetime.utcnow)
+    assigned_by = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)  # Could be a coach
+    start_date = db.Column(db.Date, nullable=True)
+    end_date = db.Column(db.Date, nullable=True)
+    status = db.Column(db.String(20), default='active')  # active, completed, cancelled
+    frequency = db.Column(db.String(50), nullable=True)  # e.g., "Mon,Wed,Fri" or "2,4,6"
+    priority = db.Column(db.Integer, default=1)  # Higher number = higher priority
+    notes = db.Column(db.Text, nullable=True)
+    
+    __table_args__ = (
+        db.UniqueConstraint('user_id', 'workout_id', name='uix_user_workout'),
+    )
+    
+    # Relationship with the assigner (optional coach)
+    assigner = db.relationship('User', foreign_keys=[assigned_by], backref='assigned_workouts')
+    
+    # Relationship with the assignee
+    user = db.relationship('User', foreign_keys=[user_id], backref='assigned_to_me')
+    
+    def to_dict(self, include_workout=False):
+        result = {
+            'id': self.id,
+            'user_id': self.user_id,
+            'workout_id': self.workout_id,
+            'assigned_at': self.assigned_at.isoformat() if self.assigned_at else None,
+            'assigned_by': self.assigned_by,
+            'start_date': self.start_date.isoformat() if self.start_date else None,
+            'end_date': self.end_date.isoformat() if self.end_date else None,
+            'status': self.status,
+            'frequency': self.frequency,
+            'priority': self.priority,
+            'notes': self.notes
+        }
+        
+        if include_workout and hasattr(self, 'workout'):
+            result['workout'] = self.workout.to_dict()
+            
+        return result
+    
+    def __repr__(self):
+        return f"<WorkoutAssignment {self.id}: {self.workout_id} to {self.user_id}>"
