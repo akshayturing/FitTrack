@@ -8,7 +8,8 @@ app = create_app(os.getenv('FLASK_CONFIG', 'default'))
 @app.cli.command('init_db')
 def init_db():
     """Initialize the database."""
-    db.create_all()
+    with app.app_context():
+        db.create_all()
     print('Database initialized.')
 
 @app.shell_context_processor
