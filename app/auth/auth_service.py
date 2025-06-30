@@ -3,7 +3,7 @@ from app.models.user import User
 from app.models.revoked_token import RevokedToken
 from flask_jwt_extended import get_jwt, get_jti, decode_token, create_access_token
 from datetime import datetime, timezone
-
+from app import db
 class AuthService:
     @staticmethod
     def authenticate(username, password):
@@ -35,12 +35,12 @@ class AuthService:
                 return None
             
             # Get the user
-            user = User.query.get(user_id)
+            user = db.session.get(User, user_id)
             if not user:
                 return None
                 
             # Create a new access token
-            access_token = create_access_token(identity=user_id)
+            access_token = create_access_token(identity=str(user.id))
             return {
                 'access_token': access_token,
                 'user': user.to_dict()

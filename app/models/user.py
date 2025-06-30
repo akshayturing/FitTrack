@@ -142,8 +142,8 @@ class User(db.Model):
     
     def generate_tokens(self):
         """Generate access and refresh tokens for this user"""
-        access_token = create_access_token(identity=self.id)
-        refresh_token = create_refresh_token(identity=self.id)
+        access_token = create_access_token(identity=str(self.id))
+        refresh_token = create_refresh_token(identity=str(self.id))
         return {
             'access_token': access_token,
             'refresh_token': refresh_token,

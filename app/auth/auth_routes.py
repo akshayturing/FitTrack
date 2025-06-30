@@ -3,10 +3,10 @@ from flask import Blueprint, request, jsonify
 from app.auth.auth_service import AuthService
 from flask_jwt_extended import jwt_required, get_jwt, get_jwt_identity, current_user
 from datetime import datetime, timezone
-
+from app.models import User
 auth_bp = Blueprint('auth', __name__)
 auth_service = AuthService()
-
+from app import db
 @auth_bp.route('/login', methods=['POST'])
 def login():
     """Login and get tokens"""
@@ -59,5 +59,11 @@ def logout():
 @auth_bp.route('/me', methods=['GET'])
 @jwt_required()
 def get_user_info():
-    """Get current user info"""
-    return jsonify(current_user.to_dict()), 200
+    jwt_user_id = get_jwt_identity()
+    user =db.session.get(User, jwt_user_id)
+    # user = User.query.get(jwt_user_id)
+    print(user)
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+    
+    return jsonify(user.to_dict()), 200

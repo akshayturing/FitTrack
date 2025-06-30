@@ -2,7 +2,7 @@
 from flask import jsonify
 from app.models.revoked_token import RevokedToken
 from app.models.user import User
-
+from app import db
 def register_jwt_callbacks(jwt):
     """Register callbacks for Flask-JWT-Extended"""
     
@@ -10,7 +10,7 @@ def register_jwt_callbacks(jwt):
     @jwt.user_lookup_loader
     def user_lookup_callback(_jwt_header, jwt_data):
         identity = jwt_data["sub"]
-        return User.query.get(identity)
+        return db.session.get(User, identity)#User.query.get(identity)
     
     # Check if a token is revoked
     @jwt.token_in_blocklist_loader

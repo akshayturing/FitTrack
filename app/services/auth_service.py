@@ -16,11 +16,11 @@ class AuthService:
         
     def get_user_by_id(self, user_id):
         """Get user by ID."""
-        return User.query.get(user_id)
+        return db.session.get(User, user_id) #User.query.get(user_id)
         
     def change_password(self, user_id, current_password, new_password):
         """Change user's password."""
-        user = User.query.get(user_id)
+        user = db.session.get(User, user_id) #User.query.get(user_id)
         if not user:
             return False
             

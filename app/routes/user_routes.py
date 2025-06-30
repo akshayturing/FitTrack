@@ -71,6 +71,7 @@ def register_user():
         return jsonify({'error': 'Invalid request data'}), 400
     
     try:
+        
         user, tokens = user_service.create_user(data)
         # Return tokens along with user data
         return jsonify(tokens), 201
