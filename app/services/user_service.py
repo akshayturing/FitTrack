@@ -6,10 +6,14 @@ class UserService:
     
     def create_user(self, user_data):
         """Create a new user."""
+        
+        print(user_data)
         username = user_data.get('username')
         email = user_data.get('email')
         password = user_data.get('password')
-        
+        print("************************")
+        print(username, email, password, user_data.get('name'))
+        print("************************")
         if not username or not email or not password:
             raise ValueError('Username, email, and password are required')
         
@@ -20,14 +24,16 @@ class UserService:
         if User.query.filter_by(email=email).first():
             raise ValueError(f'Email {email} is already registered')
         
-        user = User(username=username, email=email)
+        user = User(name=user_data.get('name'), username=username, email=email)
         user.password = password  # This will trigger the password setter to hash it
-        
+    
         db.session.add(user)
         db.session.commit()
         
         tokens = user.generate_tokens()
-        
+        print("*****************")
+        print(user)
+        print("****************")
         return user, tokens
     
     def get_user_by_id(self, user_id):

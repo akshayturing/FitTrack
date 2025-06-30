@@ -9,6 +9,7 @@ user_service = UserService()
 @user_bp.route('', methods=['POST'])
 def create_user():
     data = request.get_json()
+    print(data)
     if not data:
         return jsonify({'error': 'Invalid request data'}), 400
     
@@ -63,7 +64,9 @@ def create_user():
     
 @user_bp.route('/register', methods=['POST'])
 def register_user():
+    print("coing here")
     data = request.get_json()
+    print(data)
     if not data:
         return jsonify({'error': 'Invalid request data'}), 400
     
