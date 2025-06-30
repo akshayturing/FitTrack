@@ -77,12 +77,14 @@ class WorkoutAssignment(db.Model):
         db.Index('idx_assignment_dates', 'start_date', 'end_date'),
     )
     
-    # Relationship with the assigner (optional coach)
-    assigner = db.relationship('User', foreign_keys=[assigned_by], backref='assigned_workouts')
+    # # Relationship with the assigner (optional coach)
+    # assigner = db.relationship('User', foreign_keys=[assigned_by], backref='assigned_workouts')
     
-    # Relationship with the assignee
-    user = db.relationship('User', foreign_keys=[user_id], backref='assigned_to_me')
+    # # Relationship with the assignee
+    # user = db.relationship('User', foreign_keys=[user_id], backref='assigned_to_me')
     
+    assigner = db.relationship('User', foreign_keys=[assigned_by], back_populates='assigned_workouts')
+    user = db.relationship('User', foreign_keys=[user_id], back_populates='assigned_to_me')
     def to_dict(self, include_workout=False):
         result = {
             'id': self.id,

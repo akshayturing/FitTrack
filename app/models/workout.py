@@ -48,9 +48,9 @@ class Workout(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # Relationships
-    exercises = db.relationship('WorkoutExercise', backref='workout', lazy='dynamic', cascade='all, delete-orphan')
-    assignments = db.relationship('WorkoutAssignment', backref='workout', lazy='dynamic', cascade='all, delete-orphan')
-    sessions = db.relationship('WorkoutSession', backref='workout', lazy='dynamic')
+    # exercises = db.relationship('WorkoutExercise', backref='workout', lazy='dynamic', cascade='all, delete-orphan')
+    # assignments = db.relationship('WorkoutAssignment', backref='workout', lazy='dynamic', cascade='all, delete-orphan')
+    # sessions = db.relationship('WorkoutSession', backref='workout', lazy='dynamic')
     
     def to_dict(self, include_exercises=False):
         result = {
