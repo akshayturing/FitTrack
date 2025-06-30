@@ -60,6 +60,8 @@
 from app import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_jwt_extended import create_access_token, create_refresh_token
+from datetime import datetime, timezone
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -135,3 +137,23 @@ class User(db.Model):
     def __repr__(self):
         """Provide a helpful representation of the user object."""
         return f"<User {self.username}: {self.name}>"
+    
+    def generate_tokens(self):
+        """Generate access and refresh tokens for this user"""
+        access_token = create_access_token(identity=self.id)
+        refresh_token = create_refresh_token(identity=self.id)
+        return {
+            'access_token': access_token,
+            'refresh_token': refresh_token,
+            'user': self.to_dict()
+        }
+
+    @classmethod
+    def get_user_by_username(cls, username):
+        """Get a user by username"""
+        return cls.query.filter_by(username=username).first()
+
+    @classmethod
+    def get_user_by_email(cls, email):
+        """Get a user by email"""
+        return cls.query.filter_by(email=email).first()

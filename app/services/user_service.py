@@ -25,7 +25,9 @@ class UserService:
         db.session.add(user)
         db.session.commit()
         
-        return user
+        tokens = user.generate_tokens()
+        
+        return user, tokens
     
     def get_user_by_id(self, user_id):
         """Get user by ID."""
