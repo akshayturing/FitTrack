@@ -46,6 +46,21 @@ def create_user():
         return jsonify({'message': 'User deleted successfully'}), 200
     return jsonify({'error': 'User not found'}), 404
 
+# @user_bp.route('/register', methods=['POST'])
+# def register_user():
+#     data = request.get_json()
+#     if not data:
+#         return jsonify({'error': 'Invalid request data'}), 400
+    
+#     try:
+#         user, tokens = user_service.validate_and_register_user(data)
+#         # Return tokens along with user data
+#         return jsonify(tokens), 201
+#     except ValueError as e:
+#         return jsonify({'error': str(e)}), 400
+#     except Exception as e:
+#         return jsonify({'error': 'Failed to register user'}), 500
+    
 @user_bp.route('/register', methods=['POST'])
 def register_user():
     data = request.get_json()
@@ -53,14 +68,18 @@ def register_user():
         return jsonify({'error': 'Invalid request data'}), 400
     
     try:
-        user, tokens = user_service.validate_and_register_user(data)
+        user, tokens = user_service.create_user(data)
         # Return tokens along with user data
         return jsonify(tokens), 201
     except ValueError as e:
+        # This catches validation errors
         return jsonify({'error': str(e)}), 400
     except Exception as e:
-        return jsonify({'error': 'Failed to register user'}), 500
-    
+        # Add detailed error logging
+        import traceback
+        print(f"Registration error: {str(e)}")
+        print(traceback.format_exc())
+        return jsonify({'error': f'Failed to register user: {str(e)}'}), 500
 @user_bp.route('/<int:user_id>', methods=['GET'])
 @jwt_required()
 def get_user(user_id):

@@ -3,6 +3,7 @@ from app.models.user import User
 from app import db
 
 class UserService:
+    
     def create_user(self, user_data):
         """Create a new user."""
         username = user_data.get('username')
