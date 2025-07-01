@@ -151,7 +151,7 @@ def get_exercises():
 @admin_bp.route('/exercises/<int:exercise_id>', methods=['GET'])
 @admin_required
 def get_exercise(exercise_id):
-    exercise = Exercise.query.get(exercise_id)
+    exercise = db.session.get(Exercise, exercise_id) #Exercise.query.get(exercise_id)
     
     if not exercise:
         return jsonify({
@@ -180,7 +180,7 @@ def get_exercise(exercise_id):
 @admin_bp.route('/exercises/<int:exercise_id>', methods=['PUT'])
 @admin_required
 def update_exercise(exercise_id):
-    exercise = Exercise.query.get(exercise_id)
+    exercise = db.session.get(Exercise, exercise_id) #Exercise.query.get(exercise_id)
     
     if not exercise:
         return jsonify({
@@ -251,7 +251,7 @@ def update_exercise(exercise_id):
 @admin_bp.route('/exercises/<int:exercise_id>', methods=['DELETE'])
 @admin_required
 def delete_exercise(exercise_id):
-    exercise = Exercise.query.get(exercise_id)
+    exercise = db.session.get(Exercise, exercise_id) #Exercise.query.get(exercise_id)
     
     if not exercise:
         return jsonify({
@@ -280,7 +280,9 @@ def delete_exercise(exercise_id):
 @admin_required
 def create_workout():
     data = request.get_json()
-    
+    print("########################")
+    print(data)
+    print("########################")
     if not data:
         return jsonify({
             'status': 'error',
@@ -298,7 +300,7 @@ def create_workout():
     
     # Check if user exists
     from app.models.user import User
-    user = User.query.get(data['user_id'])
+    user = db.session.get(User, data['user_id']) #User.query.get(data['user_id'])
     if not user:
         return jsonify({
             'status': 'error',
@@ -307,11 +309,10 @@ def create_workout():
     
     # Create the workout
     workout = Workout(
-        name=data['name'],
+        title=data['name'],
         description=data.get('description'),
         user_id=data['user_id'],
-        workout_type=data.get('workout_type'),
-        duration=data.get('duration')
+        workout_type=data.get('workout_type')
     )
     
     # Process attached exercises if provided
@@ -344,7 +345,7 @@ def create_workout():
             continue
             
         # Check if exercise exists
-        exercise = Exercise.query.get(ex_data['exercise_id'])
+        exercise = db.session.get(Exercise, ex_data['exercise_id']) #Exercise.query.get(ex_data['exercise_id'])
         if not exercise:
             invalid_exercises.append({
                 'index': i,
@@ -413,7 +414,6 @@ def format_workout_response(workout):
         'description': workout.description,
         'user_id': workout.user_id,
         'workout_type': workout.workout_type,
-        'duration': workout.duration,
         'created_at': workout.created_at.isoformat() if workout.created_at else None,
         'exercises': exercises
     }
@@ -450,7 +450,7 @@ def get_workouts():
 @admin_bp.route('/workouts/<int:workout_id>', methods=['GET'])
 @admin_required
 def get_workout(workout_id):
-    workout = Workout.query.get(workout_id)
+    workout = db.session.get(Workout, workout_id) #Workout.query.get(workout_id)
     
     if not workout:
         return jsonify({
@@ -470,7 +470,7 @@ def get_workout(workout_id):
 @admin_bp.route('/workouts/<int:workout_id>', methods=['PUT'])
 @admin_required
 def update_workout(workout_id):
-    workout = Workout.query.get(workout_id)
+    workout = db.session.get(Workout, workout_id)#Workout.query.get(workout_id)
     
     if not workout:
         return jsonify({
@@ -489,7 +489,7 @@ def update_workout(workout_id):
     # Update user if provided
     if 'user_id' in data:
         from app.models.user import User
-        user = User.query.get(data['user_id'])
+        user = db.session.get(User, data['user_id']) #User.query.get(data['user_id'])
         if not user:
             return jsonify({
                 'status': 'error',
@@ -538,7 +538,7 @@ def update_workout(workout_id):
                 continue
                 
             # Check if exercise exists
-            exercise = Exercise.query.get(ex_data['exercise_id'])
+            exercise = db.session.get(Exercise, ex_data['exercise_id']) #Exercise.query.get(ex_data['exercise_id'])
             if not exercise:
                 invalid_exercises.append({
                     'index': i,
@@ -590,7 +590,7 @@ def update_workout(workout_id):
 @admin_bp.route('/workouts/<int:workout_id>', methods=['DELETE'])
 @admin_required
 def delete_workout(workout_id):
-    workout = Workout.query.get(workout_id)
+    workout = db.session.get(Workout, workout_id) # Workout.query.get(workout_id)
     
     if not workout:
         return jsonify({
@@ -620,7 +620,7 @@ def delete_workout(workout_id):
 @admin_required
 def add_exercise_to_workout(workout_id):
     """Add a single exercise to an existing workout"""
-    workout = Workout.query.get(workout_id)
+    workout = db.session.get(Workout, workout_id)#(workout_id)
     
     if not workout:
         return jsonify({
@@ -644,7 +644,7 @@ def add_exercise_to_workout(workout_id):
         }), 400
     
     # Check if exercise exists
-    exercise = Exercise.query.get(data['exercise_id'])
+    exercise = db.session.get(Exercise, data['exercise_id']) #Exercise.query.get(data['exercise_id'])
     if not exercise:
         return jsonify({
             'status': 'error',
@@ -720,7 +720,7 @@ def add_exercise_to_workout(workout_id):
 @admin_required
 def remove_exercise_from_workout(workout_id, exercise_id):
     """Remove an exercise from a workout and reorder remaining exercises"""
-    workout = Workout.query.get(workout_id)
+    workout = db.session.get(Workout, workout_id) #Workout.query.get(workout_id)
     
     if not workout:
         return jsonify({
@@ -778,7 +778,7 @@ def remove_exercise_from_workout(workout_id, exercise_id):
 @admin_required
 def reorder_workout_exercises(workout_id):
     """Reorder exercises in a workout based on the provided order"""
-    workout = Workout.query.get(workout_id)
+    workout = db.session.get(Workout, workout_id) #Workout.query.get(workout_id)
     
     if not workout:
         return jsonify({
