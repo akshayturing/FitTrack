@@ -92,7 +92,8 @@ class User(db.Model):
     workout_sessions = db.relationship('WorkoutSession', backref='user', lazy='dynamic')
     nutrition_logs = db.relationship('NutritionLog', backref='user', lazy='dynamic', cascade='all, delete-orphan')
     nutrition_profile = db.relationship('NutritionProfile', backref='user', uselist=False, cascade='all, delete-orphan')
-    
+    workouts = db.relationship("Workout", back_populates="user", cascade="all, delete-orphan")
+
     __table_args__ = (
         db.Index('idx_user_email_username', 'email', 'username'),  # Composite index for login queries
     )
