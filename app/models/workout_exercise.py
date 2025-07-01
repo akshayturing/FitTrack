@@ -56,7 +56,7 @@ class WorkoutExercise(db.Model):
         notes (str): Specific notes for this exercise in this workout
     """
     __tablename__ = 'workout_exercises'
-    
+    __table_args__ = {'extend_existing': True}
     id = Column(Integer, primary_key=True)
     workout_id = Column(Integer, ForeignKey('workouts.id'), nullable=False)
     exercise_id = Column(Integer, ForeignKey('exercises.id'), nullable=False)
