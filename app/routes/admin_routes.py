@@ -5,8 +5,10 @@ from functools import wraps
 from app.models.workout import Workout
 from app.models.workout_exercise import  WorkoutExercise
 from app.models.exercise import Exercise
-admin_bp = Blueprint('admin', __name__)
+from app.services.workout_service import WorkoutService
 
+admin_bp = Blueprint('admin', __name__)
+workout_service = WorkoutService()
 # Admin authorization middleware
 def admin_required(f):
     @wraps(f)
@@ -848,3 +850,41 @@ def reorder_workout_exercises(workout_id):
             'status': 'error',
             'message': f'An error occurred while reordering exercises: {str(e)}'
         }), 500
+
+@admin_bp.route('/workouts', methods=['GET'])
+def get_public_workouts():
+    """Get all publicly available workouts with optional filtering."""
+    # Extract filter parameters from request
+    filters = {}
+    
+    # Add filter parameters if they exist in the query string
+    if 'category' in request.args:
+        filters['category'] = request.args.get('category')
+    
+    if 'difficulty_level' in request.args:
+        filters['difficulty_level'] = request.args.get('difficulty_level')
+    
+    if 'duration' in request.args:
+        filters['duration'] = request.args.get('duration')
+    
+    if 'search' in request.args:
+        filters['search'] = request.args.get('search')
+    
+    # Get filtered workouts
+    workouts = workout_service.get_public_workouts(filters)
+    
+    # Prepare response with essential metadata
+    response = []
+    for workout in workouts:
+        # Extract only the necessary fields for the public listing
+        response.append({
+            'id': workout.id,
+            'title': workout.title,
+            'description': workout.description,
+            'difficulty_level': workout.difficulty_level,
+            'duration': workout.duration,  # in minutes
+            'category': workout.category,
+            'image_url': workout.image_url
+        })
+    
+    return jsonify(response), 200
