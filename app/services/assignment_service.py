@@ -3,7 +3,7 @@ from app.models.user import User
 from app.models.workout import Workout
 from app import db
 from sqlalchemy.exc import IntegrityError
-
+from datetime import datetime
 class AssignmentService:
     def create_assignment(self, user_id, workout_id):
         """
@@ -17,12 +17,12 @@ class AssignmentService:
             tuple: (WorkoutAssignment object, message, status_code)
         """
         # Verify user exists
-        user = User.query.get(user_id)
+        user  = db.session.get(User, user_id)# User.query.get(user_id)
         if not user:
             return None, "User not found", 404
         
         # Verify workout exists
-        workout = Workout.query.get(workout_id)
+        workout = db.session.get(Workout, workout_id)#Workout.query.get(workout_id)
         if not workout:
             return None, "Workout not found", 404
         
@@ -60,7 +60,7 @@ class AssignmentService:
     
     def mark_assignment_complete(self, assignment_id):
         """Mark an assignment as completed."""
-        assignment = WorkoutAssignment.query.get(assignment_id)
+        assignment = db.session.get(WorkoutAssignment, assignment_id)#WorkoutAssignment.query.get(assignment_id)
         if not assignment:
             return None, "Assignment not found", 404
             
@@ -116,7 +116,7 @@ class AssignmentService:
             tuple: (WorkoutAssignment object, message, status_code)
         """
         # Verify workout exists
-        new_workout = Workout.query.get(new_workout_id)
+        new_workout = db.session.get(Workout,new_workout_id)#Workout.query.get(new_workout_id)
         if not new_workout:
             return None, "Workout not found", 404
         

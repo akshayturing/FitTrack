@@ -42,6 +42,7 @@ class Workout(db.Model):
     description = db.Column(db.Text, nullable=True)
     difficulty_level = db.Column(db.String(20), nullable=True)  # beginner, intermediate, advanced
     estimated_duration = db.Column(db.Integer, nullable=True)  # in minutes
+    duration = db.Column(db.Integer, nullable=True)  # in minutes
     created_by = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     is_public = db.Column(db.Boolean, default=True)
     image_url = db.Column(db.String(255), nullable=True)
