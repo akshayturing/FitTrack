@@ -67,6 +67,10 @@ class WorkoutAssignment(db.Model):
     frequency = db.Column(db.String(50), nullable=True)  # e.g., "Mon,Wed,Fri" or "2,4,6"
     priority = db.Column(db.Integer, default=1)  # Higher number = higher priority
     notes = db.Column(db.Text, nullable=True)
+    assigned_date = db.Column(db.DateTime, default=datetime.utcnow)
+    completed = db.Column(db.Boolean, default=False)
+    completion_date = db.Column(db.DateTime)
+    
     
     __table_args__ = (
         # Enforce uniqueness for user and workout combination
@@ -97,7 +101,10 @@ class WorkoutAssignment(db.Model):
             'status': self.status,
             'frequency': self.frequency,
             'priority': self.priority,
-            'notes': self.notes
+            'notes': self.notes,
+            'assigned_date': self.assigned_date.isoformat() if self.assigned_date else None,
+            'completed': self.completed,
+            'completion_date': self.completion_date.isoformat() if self.completion_date else None
         }
         
         if include_workout and hasattr(self, 'workout'):
