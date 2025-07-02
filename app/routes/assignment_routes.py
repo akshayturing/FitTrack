@@ -61,3 +61,50 @@ def mark_assignment_complete(assignment_id):
         }), status_code
     else:
         return jsonify({'error': message}), status_code
+
+@assignment_bp.route('/<int:workout_id>', methods=['DELETE'])
+@jwt_required()
+def remove_assignment(workout_id):
+    """
+    Allows a user to unassign themselves from a specific workout
+    """
+    current_user_id = get_jwt_identity()
+    
+    result, message, status_code = assignment_service.remove_assignment(
+        user_id=current_user_id, 
+        workout_id=workout_id
+    )
+    
+    if status_code == 200:
+        return jsonify({'message': message}), status_code
+    else:
+        return jsonify({'error': message}), status_code
+    
+@assignment_bp.route('', methods=['PUT'])
+@jwt_required()
+def replace_assignment():
+    """
+    Replace current workout assignment with a new one.
+    Ensures only one active assignment per user is maintained.
+    """
+    current_user_id = get_jwt_identity()
+    
+    data = request.get_json()
+    if not data or 'workout_id' not in data:
+        return jsonify({'error': 'Missing workout_id in request'}), 400
+    
+    new_workout_id = data.get('workout_id')
+    
+    result, message, status_code = assignment_service.replace_assignment(
+        user_id=current_user_id,
+        new_workout_id=new_workout_id
+    )
+    
+    if status_code == 200:
+        return jsonify({
+            'message': message,
+            'assignment': result.to_dict() if result else None
+        }), status_code
+    else:
+        return jsonify({'error': message}), status_code
+
