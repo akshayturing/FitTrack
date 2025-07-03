@@ -3,7 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from config import config
+from flask_marshmallow import Marshmallow
 
+ma = Marshmallow()
 # Initialize extensions
 db = SQLAlchemy()
 migrate = Migrate()
@@ -18,7 +20,8 @@ def create_app(config_name='default'):
     db.init_app(app)
     migrate.init_app(app, db)
     jwt.init_app(app)
-    
+    ma.init_app(app)
+
     # Create tables within application context if they don't exist
     with app.app_context():
         db.create_all()
@@ -32,11 +35,15 @@ def create_app(config_name='default'):
     from app.auth.auth_routes import auth_bp
     from app.routes.admin_routes import admin_bp 
     from app.routes.assignment_routes import assignment_bp
+    from app.routes.session_log_routes import session_log_bp
+
     app.register_blueprint(user_bp, url_prefix='/api/users')
     app.register_blueprint(workout_bp, url_prefix='/api/workouts')
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(admin_bp, url_prefix='/admin')  # Add this
     app.register_blueprint(assignment_bp, url_prefix='/api/assignments')
+    app.register_blueprint(session_log_bp, url_prefix='/api/session-logs')
+
 
     return app
     # # Register blueprints
