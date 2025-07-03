@@ -97,7 +97,8 @@ class User(db.Model):
         lazy='dynamic',
         cascade='all, delete-orphan'
     )
-    workout_sessions = db.relationship('WorkoutSession', backref='user', lazy='dynamic')
+    # workout_sessions = db.relationship('WorkoutSession', backref='user', lazy='dynamic')
+    workout_sessions = db.relationship('WorkoutSession', back_populates='user')
     nutrition_logs = db.relationship('NutritionLog', backref='user', lazy='dynamic', cascade='all, delete-orphan')
     nutrition_profile = db.relationship('NutritionProfile', backref='user', uselist=False, cascade='all, delete-orphan')
     # workouts = db.relationship("Workout", back_populates="user", cascade="all, delete-orphan")

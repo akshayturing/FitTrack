@@ -106,7 +106,8 @@ class WorkoutSession(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
     
     # Relationships
-    user = db.relationship('User', backref=db.backref('workout_sessions', lazy=True, cascade='all, delete-orphan'))
+    # user = db.relationship('User', backref=db.backref('workout_sessions', lazy=True, cascade='all, delete-orphan'))
+    user = db.relationship('User', back_populates='workout_sessions')
     workout_assignment = db.relationship('WorkoutAssignment', backref=db.backref('workout_sessions', lazy=True))
     set_logs = db.relationship('SetLog', backref=db.backref('workout_session', lazy=True), cascade='all, delete-orphan')
     
