@@ -1,8 +1,8 @@
-"""Initial database setup
+"""initial
 
-Revision ID: c7b7ff3e3195
+Revision ID: ecdd82d0250e
 Revises: 
-Create Date: 2025-07-02 00:41:55.767366
+Create Date: 2025-07-04 00:34:27.071799
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c7b7ff3e3195'
+revision = 'ecdd82d0250e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -57,7 +57,6 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('users', schema=None) as batch_op:
-        batch_op.create_index('idx_user_email_username', ['email', 'username'], unique=False)
         batch_op.create_index(batch_op.f('ix_users_email'), ['email'], unique=True)
         batch_op.create_index(batch_op.f('ix_users_username'), ['username'], unique=True)
 
@@ -152,15 +151,19 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('category', sa.String(length=50), nullable=True),
+    sa.Column('workout_type', sa.String(length=50), nullable=True),
     sa.Column('description', sa.Text(), nullable=True),
     sa.Column('difficulty_level', sa.String(length=20), nullable=True),
     sa.Column('estimated_duration', sa.Integer(), nullable=True),
+    sa.Column('duration', sa.Integer(), nullable=True),
     sa.Column('created_by', sa.Integer(), nullable=True),
     sa.Column('is_public', sa.Boolean(), nullable=True),
     sa.Column('image_url', sa.String(length=255), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['created_by'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('exercise_logs',
@@ -214,8 +217,11 @@ def upgrade():
     sa.Column('frequency', sa.String(length=50), nullable=True),
     sa.Column('priority', sa.Integer(), nullable=True),
     sa.Column('notes', sa.Text(), nullable=True),
+    sa.Column('assigned_date', sa.DateTime(), nullable=True),
+    sa.Column('completed', sa.Boolean(), nullable=True),
+    sa.Column('completion_date', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['assigned_by'], ['users.id'], ondelete='SET NULL'),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['workout_id'], ['workouts.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('user_id', 'workout_id', name='uix_user_workout_assignment')
@@ -225,7 +231,6 @@ def upgrade():
         batch_op.create_index('idx_assignment_user_status', ['user_id', 'status'], unique=False)
         batch_op.create_index(batch_op.f('ix_workout_assignments_assigned_by'), ['assigned_by'], unique=False)
         batch_op.create_index(batch_op.f('ix_workout_assignments_status'), ['status'], unique=False)
-        batch_op.create_index(batch_op.f('ix_workout_assignments_user_id'), ['user_id'], unique=False)
         batch_op.create_index(batch_op.f('ix_workout_assignments_workout_id'), ['workout_id'], unique=False)
 
     op.create_table('workout_exercises',
@@ -254,74 +259,48 @@ def upgrade():
     op.create_table('workout_sessions',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('workout_id', sa.Integer(), nullable=False),
-    sa.Column('started_at', sa.DateTime(), nullable=False),
-    sa.Column('completed_at', sa.DateTime(), nullable=True),
-    sa.Column('duration', sa.Integer(), nullable=True),
-    sa.Column('calories_burned', sa.Integer(), nullable=True),
-    sa.Column('difficulty_rating', sa.Integer(), nullable=True),
-    sa.Column('mood', sa.String(length=50), nullable=True),
+    sa.Column('workout_assignment_id', sa.Integer(), nullable=True),
+    sa.Column('session_date', sa.DateTime(), nullable=False),
+    sa.Column('duration_minutes', sa.Integer(), nullable=True),
     sa.Column('notes', sa.Text(), nullable=True),
+    sa.Column('perceived_exertion', sa.Integer(), nullable=True),
+    sa.Column('completed', sa.Boolean(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
-    sa.ForeignKeyConstraint(['workout_id'], ['workouts.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], name='fk_workout_session_user', ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['workout_assignment_id'], ['workout_assignments.id'], name='fk_workout_session_assignment', ondelete='SET NULL'),
     sa.PrimaryKeyConstraint('id')
     )
-    with op.batch_alter_table('workout_sessions', schema=None) as batch_op:
-        batch_op.create_index('idx_session_user_date', ['user_id', 'started_at'], unique=False)
-        batch_op.create_index('idx_session_workout_date', ['workout_id', 'started_at'], unique=False)
-        batch_op.create_index(batch_op.f('ix_workout_sessions_started_at'), ['started_at'], unique=False)
-        batch_op.create_index(batch_op.f('ix_workout_sessions_user_id'), ['user_id'], unique=False)
-        batch_op.create_index(batch_op.f('ix_workout_sessions_workout_id'), ['workout_id'], unique=False)
-
     op.create_table('set_logs',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('session_id', sa.Integer(), nullable=False),
-    sa.Column('exercise_id', sa.Integer(), nullable=False),
-    sa.Column('set_number', sa.Integer(), nullable=False),
+    sa.Column('workout_session_id', sa.Integer(), nullable=False),
+    sa.Column('exercise_id', sa.Integer(), nullable=True),
+    sa.Column('set_number', sa.Integer(), nullable=True),
     sa.Column('reps', sa.Integer(), nullable=True),
     sa.Column('weight', sa.Float(), nullable=True),
-    sa.Column('time_duration', sa.Integer(), nullable=True),
+    sa.Column('weight_unit', sa.String(length=10), nullable=True),
+    sa.Column('duration_seconds', sa.Integer(), nullable=True),
     sa.Column('distance', sa.Float(), nullable=True),
-    sa.Column('rpe', sa.Float(), nullable=True),
-    sa.Column('completed', sa.Boolean(), nullable=False),
-    sa.Column('notes', sa.Text(), nullable=True),
-    sa.Column('logged_at', sa.DateTime(), nullable=False),
-    sa.ForeignKeyConstraint(['exercise_id'], ['exercises.id'], ondelete='CASCADE'),
-    sa.ForeignKeyConstraint(['session_id'], ['workout_sessions.id'], ondelete='CASCADE'),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('session_id', 'exercise_id', 'set_number', name='uix_session_exercise_set')
+    sa.Column('distance_unit', sa.String(length=10), nullable=True),
+    sa.Column('difficulty', sa.Integer(), nullable=True),
+    sa.Column('notes', sa.String(length=255), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['exercise_id'], ['exercises.id'], name='fk_set_log_exercise', ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['workout_session_id'], ['workout_sessions.id'], name='fk_set_log_session', ondelete='CASCADE'),
+    sa.PrimaryKeyConstraint('id')
     )
-    with op.batch_alter_table('set_logs', schema=None) as batch_op:
-        batch_op.create_index('idx_set_exercise_date', ['exercise_id', 'logged_at'], unique=False)
-        batch_op.create_index(batch_op.f('ix_set_logs_exercise_id'), ['exercise_id'], unique=False)
-        batch_op.create_index(batch_op.f('ix_set_logs_session_id'), ['session_id'], unique=False)
-
     # ### end Alembic commands ###
 
 
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
-    with op.batch_alter_table('set_logs', schema=None) as batch_op:
-        batch_op.drop_index(batch_op.f('ix_set_logs_session_id'))
-        batch_op.drop_index(batch_op.f('ix_set_logs_exercise_id'))
-        batch_op.drop_index('idx_set_exercise_date')
-
     op.drop_table('set_logs')
-    with op.batch_alter_table('workout_sessions', schema=None) as batch_op:
-        batch_op.drop_index(batch_op.f('ix_workout_sessions_workout_id'))
-        batch_op.drop_index(batch_op.f('ix_workout_sessions_user_id'))
-        batch_op.drop_index(batch_op.f('ix_workout_sessions_started_at'))
-        batch_op.drop_index('idx_session_workout_date')
-        batch_op.drop_index('idx_session_user_date')
-
     op.drop_table('workout_sessions')
     op.drop_table('workout_plans')
     op.drop_table('workout_exercises')
     with op.batch_alter_table('workout_assignments', schema=None) as batch_op:
         batch_op.drop_index(batch_op.f('ix_workout_assignments_workout_id'))
-        batch_op.drop_index(batch_op.f('ix_workout_assignments_user_id'))
         batch_op.drop_index(batch_op.f('ix_workout_assignments_status'))
         batch_op.drop_index(batch_op.f('ix_workout_assignments_assigned_by'))
         batch_op.drop_index('idx_assignment_user_status')
@@ -351,7 +330,6 @@ def downgrade():
     with op.batch_alter_table('users', schema=None) as batch_op:
         batch_op.drop_index(batch_op.f('ix_users_username'))
         batch_op.drop_index(batch_op.f('ix_users_email'))
-        batch_op.drop_index('idx_user_email_username')
 
     op.drop_table('users')
     op.drop_table('revoked_tokens')
