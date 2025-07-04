@@ -75,6 +75,7 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     last_login = db.Column(db.DateTime, nullable=True)
     profile_image = db.Column(db.String(255), nullable=True)
+    is_admin = db.Column(db.Boolean, default=False)  # Add this line
     
     # Nutrition fields
     calorie_goal = db.Column(db.Integer, nullable=True)
@@ -116,6 +117,10 @@ class User(db.Model):
         
     @password.setter
     def password(self, password):
+        """Set password to a hashed password."""
+        self._password_hash = generate_password_hash(password)
+    @password.setter
+    def set_password(self, password):
         """Set password to a hashed password."""
         self._password_hash = generate_password_hash(password)
         

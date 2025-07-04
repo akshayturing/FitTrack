@@ -2,7 +2,9 @@
 from app.models.workout import Workout
 from app.models.user import User
 from app import db
-
+from app.models.workout_assignment import WorkoutAssignment
+import app
+from sqlalchemy.exc import SQLAlchemyError
 class WorkoutService:
     def create_workout(self, workout_data):
         """Create a new workout."""
@@ -138,7 +140,6 @@ class WorkoutService:
             # Get all relevant workouts
             return Workout.query.filter(Workout.id.in_(workout_ids)).all()
         except SQLAlchemyError as e:
-            current_app.logger.error(f"Database error in get_user_assigned_workouts: {str(e)}")
             raise
     
     @staticmethod
