@@ -36,6 +36,7 @@ def create_app(config_name='default'):
     from app.routes.admin_routes import admin_bp 
     from app.routes.assignment_routes import assignment_bp
     from app.routes.session_log_routes import session_log_bp
+    from app.routes.dashboard_routes import dashboard_bp  # Import dashboard blueprint
 
     app.register_blueprint(user_bp, url_prefix='/api/users')
     app.register_blueprint(workout_bp, url_prefix='/api/workouts')
@@ -43,6 +44,7 @@ def create_app(config_name='default'):
     app.register_blueprint(admin_bp, url_prefix='/admin')  # Add this
     app.register_blueprint(assignment_bp, url_prefix='/api/assignments')
     app.register_blueprint(session_log_bp, url_prefix='/api/session-logs')
+    app.register_blueprint(dashboard_bp)  # Register without prefix to include UI routes
 
 
     return app

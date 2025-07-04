@@ -1,0 +1,19 @@
+.badge {
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 0.35em 0.65em;
+    margin-right: 0.5rem;
+}
+
+.badge-focus {
+    background-color: var(--primary-color);
+}
+
+.badge-difficulty {
+    background-color: var(--warning-color);
+    color: #212529;
+}
+
+.badge-duration {
+    background-color: var(--info-color);
+}
