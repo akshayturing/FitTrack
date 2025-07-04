@@ -62,6 +62,7 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token, create_refresh_token
 from datetime import datetime, timezone
+from app import db, login_manager
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -170,3 +171,9 @@ class User(db.Model):
     def get_user_by_email(cls, email):
         """Get a user by email"""
         return cls.query.filter_by(email=email).first()
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        """User loader function for Flask-Login"""
+        return User.query.get(int(user_id))
+    
