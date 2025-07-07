@@ -9,6 +9,7 @@ auth_service = AuthService()
 from app import db
 @auth_bp.route('/login', methods=['POST'])
 def login():
+    
     """Login and get tokens"""
     if not request.is_json:
         return jsonify({"error": "Missing JSON in request"}), 400
@@ -20,7 +21,9 @@ def login():
         return jsonify({"error": "Missing username or password"}), 400
     
     tokens = auth_service.authenticate(username, password)
-    
+    print(tokens)
+    print("coming here")
+
     if not tokens:
         return jsonify({"error": "Invalid username or password"}), 401
     
