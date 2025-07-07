@@ -15,35 +15,81 @@ def workout_dashboard():
     return render_template('workout_dashboard.html', user=current_user)
 
 
-@dashboard_bp.route('/users/<int:user_id>/workouts', methods=['GET'])
-@jwt_required()
-def get_user_workouts_api(user_id):
-    """
-    API endpoint to get all workouts assigned to a user.
-    JWT authenticated version.
-    """
-    # Get user ID from JWT token
-    current_user_id = get_jwt_identity()
+
+
+# @dashboard_bp.route('/users/<int:user_id>/workouts', methods=['GET'])
+# @jwt_required()
+# def get_user_workouts_api(user_id):
+#     """
+#     API endpoint to get all workouts assigned to a user.
+#     JWT authenticated version.
+#     """
+#     # Get user ID from JWT token
+#     current_user_id = get_jwt_identity()
     
-    # Check if the user is requesting their own workouts
-    if current_user_id != user_id:
-        return jsonify({"error": "Unauthorized access"}), 403
+#     # Check if the user is requesting their own workouts
+#     if current_user_id != user_id:
+#         return jsonify({"error": "Unauthorized access"}), 403
     
-    try:
-        # Get all workout assignments for the user
-        assignments = WorkoutAssignment.query.filter_by(user_id=user_id, is_active=True).all()
+#     try:
+#         # Get all workout assignments for the user
+#         assignments = WorkoutAssignment.query.filter_by(user_id=user_id, is_active=True).all()
         
-        # Extract workout IDs from assignments
-        workout_ids = [assignment.workout_id for assignment in assignments]
+#         # Extract workout IDs from assignments
+#         workout_ids = [assignment.workout_id for assignment in assignments]
         
-        # Get all relevant workouts
-        workouts = Workout.query.filter(Workout.id.in_(workout_ids)).all() if workout_ids else []
+#         # Get all relevant workouts
+#         workouts = Workout.query.filter(Workout.id.in_(workout_ids)).all() if workout_ids else []
         
-        # Return serialized workouts
-        return jsonify({"workouts": workouts_schema.dump(workouts)}), 200
-    except Exception as e:
-        current_app.logger.error(f"Error fetching user workouts: {str(e)}")
-        return jsonify({"error": "Failed to fetch workouts"}), 500
+#         # Return serialized workouts
+#         return jsonify({"workouts": workouts_schema.dump(workouts)}), 200
+#     except Exception as e:
+#         current_app.logger.error(f"Error fetching user workouts: {str(e)}")
+#         return jsonify({"error": "Failed to fetch workouts"}), 500
+
+# @dashboard_bp.route('/users/<int:user_id>/workouts', methods=['GET'])
+# @jwt_required()
+# def get_user_workouts_api(user_id):
+#     """
+#     API endpoint to get all workouts assigned to a user.
+#     JWT authenticated version.
+#     """
+#     # Get user ID from JWT token
+#     current_user_id = get_jwt_identity()
+    
+#     try:
+#         # Convert IDs to integers for comparison (in case one is a string)
+#         current_user_id = int(current_user_id)
+#     except (ValueError, TypeError):
+#         pass
+    
+#     try:
+#         # First check: Basic authorization - is the requested user ID matching the token?
+#         if current_user_id != user_id:
+#             # Second check: Is the current user an admin?
+#             current_user = User.query.get(current_user_id)
+#             if not current_user or not getattr(current_user, 'is_admin', False):
+#                 # Log the attempt for security monitoring
+#                 current_app.logger.warning(
+#                     f"User {current_user_id} attempted unauthorized access to user {user_id}'s workouts"
+#                 )
+#                 return jsonify({"error": "Unauthorized access. You can only view your own workouts."}), 403
+        
+#         # Get all workout assignments for the user
+#         assignments = WorkoutAssignment.query.filter_by(user_id=user_id, is_active=True).all()
+        
+#         # Extract workout IDs from assignments
+#         workout_ids = [assignment.workout_id for assignment in assignments]
+        
+#         # Get all relevant workouts
+#         workouts = Workout.query.filter(Workout.id.in_(workout_ids)).all() if workout_ids else []
+        
+#         # Return serialized workouts
+#         return jsonify({"workouts": workouts_schema.dump(workouts)}), 200
+    
+#     except Exception as e:
+#         current_app.logger.error(f"Error fetching user workouts: {str(e)}")
+#         return jsonify({"error": f"Failed to fetch workouts: {str(e)}"}), 500
 
 # @dashboard_bp.route('/api/users/<i>/workouts')
 # @login_required

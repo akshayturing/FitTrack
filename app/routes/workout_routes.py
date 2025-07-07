@@ -55,9 +55,14 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.services.workout_service import WorkoutService
 from flask_jwt_extended import jwt_required, current_user
-
+from app.models.user import User
 workout_bp = Blueprint('workouts', __name__)
 workout_service = WorkoutService()
+from flask import current_app
+from app.models.workout import Workout
+from app.models.workout_assignment import WorkoutAssignment
+from app.schemas.workout_schema import workouts_schema
+
 
 # @workout_bp.route('', methods=['POST'])
 # @jwt_required()  # Protected endpoint
@@ -163,6 +168,46 @@ def create_workout():
     except Exception as e:
         return jsonify({'error': 'Failed to create workout'}), 500
 
+@workout_bp.route('/users/<int:user_id>/workouts', methods=['GET'])
+@jwt_required()
+def get_user_workouts_api(user_id):
+    """
+    API endpoint to get all workouts assigned to a user.
+    JWT authenticated version.
+    """
+    # Get user ID from JWT token
+    current_user_id = get_jwt_identity()
+    print(current_user_id)
+    # Get the authenticated user to check for admin status
+    current_user = User.query.get(current_user_id)
+    if not current_user:
+        return jsonify({"error": "User not found"}), 404
+    
+    # Check if the user is requesting their own workouts or is an admin
+    if current_user_id != user_id and not getattr(current_user, 'is_admin', False):
+        return jsonify({"error": "Unauthorized access"}), 403
+    
+    try:
+        # Check if requested user exists
+        requested_user = User.query.get(user_id)
+        if not requested_user:
+            return jsonify({"error": "Requested user not found"}), 404
+            
+        # Get all workout assignments for the user
+        assignments = WorkoutAssignment.query.filter_by(user_id=user_id, is_active=True).all()
+        
+        # Extract workout IDs from assignments
+        workout_ids = [assignment.workout_id for assignment in assignments]
+        
+        # Get all relevant workouts
+        workouts = Workout.query.filter(Workout.id.in_(workout_ids)).all() if workout_ids else []
+        
+        # Return serialized workouts
+        return jsonify({"workouts": workouts_schema.dump(workouts)}), 200
+    except Exception as e:
+        current_app.logger.error(f"Error fetching user workouts: {str(e)}")
+        return jsonify({"error": f"Failed to fetch workouts: {str(e)}"}), 500
+    
 @workout_bp.route('/<int:workout_id>', methods=['GET'])
 @jwt_required()
 def get_workout(workout_id):
