@@ -537,3 +537,21 @@ def database(app):
         # Tear down: clear session and drop all tables
         db.session.remove()
         db.drop_all()
+
+@pytest.fixture(scope='function')
+def init_database(app):
+    """
+    Initialize a fresh database for testing.
+    
+    This fixture sets up a clean database with tables and cleans up after tests.
+    """
+    with app.app_context():
+        # Create all tables
+        db.create_all()
+        
+        # Yield to allow tests to run
+        yield db
+        
+        # Clean up after the test
+        db.session.remove()
+        db.drop_all()

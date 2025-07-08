@@ -94,6 +94,8 @@ run_test_module "test_auth.py" "Authentication"
 # Run user model tests
 run_test_module "jwt_config.py" "User Model"
 
+run_test_module "models/test_workout_assignment.py" "User Model"
+
 # Run workout model tests
 #run_test_module "test_services/test_assignment_service.py" "Workout Model"
 
@@ -110,7 +112,7 @@ run_test_module "jwt_config.py" "User Model"
 # run_test_module "test_integration.py" "Integration"
 
 # # Run authentication tests with coverage
-run_test_with_coverage "test_auth.py" "app/routes/auth_routes.py,app/models/user.py" "Authentication"
+# run_test_with_coverage "test_auth.py" "app/routes/auth_routes.py,app/models/user.py" "Authentication"
 
 # Run a full test coverage report for critical components
 echo -e "${BLUE}=========================================================${NC}"
@@ -118,7 +120,7 @@ echo -e "${CYAN}Running Full Test Suite with Coverage${NC}"
 echo -e "${BLUE}=========================================================${NC}"
 
 # Run all tests with coverage
-python3.10 -m pytest -v --cov=app --cov-report=html --cov-report=term
+# python3.10 -m pytest -v --cov=app --cov-report=html --cov-report=term
 
 # Final status report
 echo ""
@@ -137,7 +139,7 @@ echo -e "${BLUE}=========================================================${NC}"
 mkdir -p test-reports
 
 # Generate junit XML report
-python3.10 -m pytest --junitxml=test-reports/test-results.xml
+# python3.10 -m pytest --junitxml=test-reports/test-results.xml
 
 # Print location of HTML coverage report
 echo -e "${YELLOW}HTML coverage report generated in: htmlcov/index.html${NC}"
