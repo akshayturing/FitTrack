@@ -449,12 +449,12 @@ def test_workout(app, test_user):
     """Create a test workout for the test user."""
     with app.app_context():
         workout = Workout(
-            name="Test Workout",
+            title="Test Workout",
             description="Test workout description",
             workout_type="strength",
-            focus_area="upper body",
-            difficulty="beginner",
-            duration_minutes=30,
+            # focus_area="upper body",
+            # difficulty="beginner",
+            duration=30,
             user_id=test_user.id
         )
         db.session.add(workout)
@@ -464,7 +464,7 @@ def test_workout(app, test_user):
         assignment = WorkoutAssignment(
             user_id=test_user.id,
             workout_id=workout.id,
-            is_active=True,
+            # is_active=True,
             assigned_date=datetime.utcnow()
         )
         db.session.add(assignment)
@@ -488,3 +488,24 @@ def admin_auth_token(app, test_admin_user):
     """Create a valid access token for the admin user."""
     with app.app_context():
         return create_access_token(identity=test_admin_user.id)
+
+@pytest.fixture
+def auth_headers(auth_token):
+    """
+    Create HTTP headers with a valid authentication token.
+    
+    This fixture depends on the auth_token fixture and simply formats it
+    properly for use in HTTP Authorization header.
+    """
+    return {'Authorization': f'Bearer {auth_token}'}
+
+
+@pytest.fixture
+def admin_auth_headers(admin_auth_token):
+    """
+    Create HTTP headers with a valid admin authentication token.
+    
+    This fixture depends on the admin_auth_token fixture and formats it
+    properly for use in HTTP Authorization header.
+    """
+    return {'Authorization': f'Bearer {admin_auth_token}'}

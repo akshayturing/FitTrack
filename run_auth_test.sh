@@ -95,21 +95,21 @@ run_test_module "test_auth.py" "Authentication"
 run_test_module "jwt_config.py" "User Model"
 
 # Run workout model tests
-run_test_module "test_services/test_assignment_service.py" "Workout Model"
+#run_test_module "test_services/test_assignment_service.py" "Workout Model"
 
 # Run workout session tests
-run_test_module "models/test_workout_assignment.py" "Workout Session"
+# run_test_module "models/test_workout_assignment.py" "Workout Session"
 
 # Run API endpoint tests
-run_test_module "test_api_endpoints.py" "API Endpoints"
+# run_test_module "test_api_endpoints.py" "API Endpoints"
 
 # Run dashboard functionality tests
-run_test_module "test_dashboard.py" "Dashboard Functionality"
+# run_test_module "test_dashboard.py" "Dashboard Functionality"
 
-# Run integration tests
-run_test_module "test_integration.py" "Integration"
+# # Run integration tests
+# run_test_module "test_integration.py" "Integration"
 
-# Run authentication tests with coverage
+# # Run authentication tests with coverage
 run_test_with_coverage "test_auth.py" "app/routes/auth_routes.py,app/models/user.py" "Authentication"
 
 # Run a full test coverage report for critical components

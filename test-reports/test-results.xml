@@ -1,8 +1,672 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="0.559" timestamp="2025-07-08T23:08:06.984467" hostname="tejwani-mac"><testcase classname="" name="Downloads.Fittrack.FitTrack.tests.test_frontend.test_dashboard_js" time="0.000"><error message="collection failure">ImportError while importing test module '/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_frontend/test_dashboard_js.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-/opt/homebrew/Cellar/python@3.10/3.10.17_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/importlib/__init__.py:126: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-tests/test_frontend/test_dashboard_js.py:3: in &lt;module&gt;
-    from selenium import webdriver
-E   ModuleNotFoundError: No module named 'selenium'</error></testcase></testsuite></testsuites>
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="43" failures="5" skipped="0" tests="74" time="3.330" timestamp="2025-07-08T23:29:44.049025" hostname="tejwani-mac"><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_create_exercise" time="0.064" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_create_exercise_missing_fields" time="0.042" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_create_exercise_invalid_type" time="0.043" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_create_duplicate_exercise" time="0.047" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_get_all_exercises" time="0.048" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_filter_exercises_by_type" time="0.045" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_get_exercise_by_id" time="0.044" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_get_nonexistent_exercise" time="0.040" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_update_exercise" time="0.045" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_update_exercise_type" time="0.042" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_update_exercise_invalid_type" time="0.041" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_delete_exercise" time="0.045" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_delete_nonexistent_exercise" time="0.039" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_unauthorized_access" time="0.041" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_invalid_api_key" time="0.038" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_create_workout" time="0.041" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_create_workout_missing_fields" time="0.040" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_create_workout_invalid_user" time="0.040" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_admin_routes" name="test_create_workout_invalid_exercise" time="0.040" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_auth.TestAuthRoutes" name="test_login_success" time="0.090" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_auth.TestAuthRoutes" name="test_login_invalid_credentials" time="0.047" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_auth.TestAuthRoutes" name="test_login_missing_fields" time="0.014" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_auth.TestAuthRoutes" name="test_refresh_token" time="0.044" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_auth.TestAuthRoutes" name="test_refresh_with_access_token" time="0.044" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_auth.TestAuthRoutes" name="test_logout" time="0.043" /><testcase classname="Downloads.Fittrack.FitTrack.tests.test_auth.TestAuthRoutes" name="test_get_current_user" time="0.043" /><testcase classname="Downloads.Fittrack.FitTrack.tests.integration.test_workout_logging_flow.TestWorkoutLoggingFlow" name="test_complete_workout_flow" time="0.043"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/integration/test_workout_logging_flow.py, line 8&#10;      def test_complete_workout_flow(self, client, auth_headers, test_user, test_exercises):&#10;E       fixture 'test_exercises' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/integration/test_workout_logging_flow.py:8&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/integration/test_workout_logging_flow.py, line 8
+      def test_complete_workout_flow(self, client, auth_headers, test_user, test_exercises):
+E       fixture 'test_exercises' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/integration/test_workout_logging_flow.py:8</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.integration.test_workout_logging_flow.TestWorkoutLoggingFlow" name="test_filtering_and_pagination" time="0.042"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/integration/test_workout_logging_flow.py, line 125&#10;      def test_filtering_and_pagination(self, client, auth_headers, test_user, test_workout_session):&#10;E       fixture 'test_workout_session' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/integration/test_workout_logging_flow.py:125&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/integration/test_workout_logging_flow.py, line 125
+      def test_filtering_and_pagination(self, client, auth_headers, test_user, test_workout_session):
+E       fixture 'test_workout_session' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/integration/test_workout_logging_flow.py:125</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.models.test_workout_assignment" name="test_create_assignment" time="0.044"><error message="failed on setup with &quot;TypeError: 'name' is an invalid keyword argument for Workout&quot;">app = &lt;Flask 'app'&gt;, test_user = &lt;User testuser: User&gt;
+
+    @pytest.fixture
+    def test_workout(app, test_user):
+        """Create a test workout for the test user."""
+        with app.app_context():
+&gt;           workout = Workout(
+                name="Test Workout",
+                description="Test workout description",
+                workout_type="strength",
+                focus_area="upper body",
+                difficulty="beginner",
+                duration_minutes=30,
+                user_id=test_user.id
+            )
+
+app        = &lt;Flask 'app'&gt;
+test_user  = &lt;User testuser: User&gt;
+
+tests/conftest.py:451: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+venv/lib/python3.10/site-packages/sqlalchemy/orm/state.py:571: in _initialize_instance
+    with util.safe_reraise():
+        args       = ()
+        instance   = &lt;Workout None: None&gt;
+        kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+        manager    = &lt;ClassManager of &lt;class 'app.models.workout.Workout'&gt; at 1033e33d0&gt;
+        mixed      = (&lt;sqlalchemy.orm.state.InstanceState object at 0x10435f4c0&gt;, &lt;Workout None: None&gt;)
+        self       = &lt;sqlalchemy.orm.state.InstanceState object at 0x10435f4c0&gt;
+venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py:224: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+        exc_tb     = &lt;traceback object at 0x1043cc840&gt;
+        exc_type   = &lt;class 'TypeError'&gt;
+        exc_value  = TypeError("'name' is an invalid keyword argument for Workout")
+        self       = &lt;sqlalchemy.util.langhelpers.safe_reraise object at 0x10437d360&gt;
+        traceback  = None
+        type_      = None
+        value      = None
+venv/lib/python3.10/site-packages/sqlalchemy/orm/state.py:569: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+        args       = ()
+        instance   = &lt;Workout None: None&gt;
+        kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+        manager    = &lt;ClassManager of &lt;class 'app.models.workout.Workout'&gt; at 1033e33d0&gt;
+        mixed      = (&lt;sqlalchemy.orm.state.InstanceState object at 0x10435f4c0&gt;, &lt;Workout None: None&gt;)
+        self       = &lt;sqlalchemy.orm.state.InstanceState object at 0x10435f4c0&gt;
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;Workout None: None&gt;
+kwargs = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+cls_ = &lt;class 'app.models.workout.Workout'&gt;, k = 'name'
+
+    def _declarative_constructor(self: Any, **kwargs: Any) -&gt; None:
+        """A simple constructor that allows initialization from kwargs.
+    
+        Sets attributes on the constructed instance using the names and
+        values in ``kwargs``.
+    
+        Only keys that are present as
+        attributes of the instance's class are allowed. These could be,
+        for example, any mapped columns or relationships.
+        """
+        cls_ = type(self)
+        for k in kwargs:
+            if not hasattr(cls_, k):
+&gt;               raise TypeError(
+                    "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+                )
+E               TypeError: 'name' is an invalid keyword argument for Workout
+
+cls_       = &lt;class 'app.models.workout.Workout'&gt;
+k          = 'name'
+kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+self       = &lt;Workout None: None&gt;
+
+venv/lib/python3.10/site-packages/sqlalchemy/orm/decl_base.py:2173: TypeError</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.models.test_workout_assignment" name="test_assignment_unique_constraint" time="0.043"><error message="failed on setup with &quot;TypeError: 'name' is an invalid keyword argument for Workout&quot;">app = &lt;Flask 'app'&gt;, test_user = &lt;User testuser: User&gt;
+
+    @pytest.fixture
+    def test_workout(app, test_user):
+        """Create a test workout for the test user."""
+        with app.app_context():
+&gt;           workout = Workout(
+                name="Test Workout",
+                description="Test workout description",
+                workout_type="strength",
+                focus_area="upper body",
+                difficulty="beginner",
+                duration_minutes=30,
+                user_id=test_user.id
+            )
+
+app        = &lt;Flask 'app'&gt;
+test_user  = &lt;User testuser: User&gt;
+
+tests/conftest.py:451: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+venv/lib/python3.10/site-packages/sqlalchemy/orm/state.py:571: in _initialize_instance
+    with util.safe_reraise():
+        args       = ()
+        instance   = &lt;Workout None: None&gt;
+        kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+        manager    = &lt;ClassManager of &lt;class 'app.models.workout.Workout'&gt; at 1033e33d0&gt;
+        mixed      = (&lt;sqlalchemy.orm.state.InstanceState object at 0x1041cb0a0&gt;, &lt;Workout None: None&gt;)
+        self       = &lt;sqlalchemy.orm.state.InstanceState object at 0x1041cb0a0&gt;
+venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py:224: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+        exc_tb     = &lt;traceback object at 0x104489880&gt;
+        exc_type   = &lt;class 'TypeError'&gt;
+        exc_value  = TypeError("'name' is an invalid keyword argument for Workout")
+        self       = &lt;sqlalchemy.util.langhelpers.safe_reraise object at 0x10442d990&gt;
+        traceback  = None
+        type_      = None
+        value      = None
+venv/lib/python3.10/site-packages/sqlalchemy/orm/state.py:569: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+        args       = ()
+        instance   = &lt;Workout None: None&gt;
+        kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+        manager    = &lt;ClassManager of &lt;class 'app.models.workout.Workout'&gt; at 1033e33d0&gt;
+        mixed      = (&lt;sqlalchemy.orm.state.InstanceState object at 0x1041cb0a0&gt;, &lt;Workout None: None&gt;)
+        self       = &lt;sqlalchemy.orm.state.InstanceState object at 0x1041cb0a0&gt;
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;Workout None: None&gt;
+kwargs = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+cls_ = &lt;class 'app.models.workout.Workout'&gt;, k = 'name'
+
+    def _declarative_constructor(self: Any, **kwargs: Any) -&gt; None:
+        """A simple constructor that allows initialization from kwargs.
+    
+        Sets attributes on the constructed instance using the names and
+        values in ``kwargs``.
+    
+        Only keys that are present as
+        attributes of the instance's class are allowed. These could be,
+        for example, any mapped columns or relationships.
+        """
+        cls_ = type(self)
+        for k in kwargs:
+            if not hasattr(cls_, k):
+&gt;               raise TypeError(
+                    "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+                )
+E               TypeError: 'name' is an invalid keyword argument for Workout
+
+cls_       = &lt;class 'app.models.workout.Workout'&gt;
+k          = 'name'
+kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+self       = &lt;Workout None: None&gt;
+
+venv/lib/python3.10/site-packages/sqlalchemy/orm/decl_base.py:2173: TypeError</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_assignment_routes" name="test_create_assignment_success" time="0.043"><error message="failed on setup with &quot;TypeError: 'name' is an invalid keyword argument for Workout&quot;">app = &lt;Flask 'app'&gt;, test_user = &lt;User testuser: User&gt;
+
+    @pytest.fixture
+    def test_workout(app, test_user):
+        """Create a test workout for the test user."""
+        with app.app_context():
+&gt;           workout = Workout(
+                name="Test Workout",
+                description="Test workout description",
+                workout_type="strength",
+                focus_area="upper body",
+                difficulty="beginner",
+                duration_minutes=30,
+                user_id=test_user.id
+            )
+
+app        = &lt;Flask 'app'&gt;
+test_user  = &lt;User testuser: User&gt;
+
+tests/conftest.py:451: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+venv/lib/python3.10/site-packages/sqlalchemy/orm/state.py:571: in _initialize_instance
+    with util.safe_reraise():
+        args       = ()
+        instance   = &lt;Workout None: None&gt;
+        kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+        manager    = &lt;ClassManager of &lt;class 'app.models.workout.Workout'&gt; at 1033e33d0&gt;
+        mixed      = (&lt;sqlalchemy.orm.state.InstanceState object at 0x10435cc40&gt;, &lt;Workout None: None&gt;)
+        self       = &lt;sqlalchemy.orm.state.InstanceState object at 0x10435cc40&gt;
+venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py:224: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+        exc_tb     = &lt;traceback object at 0x1041c0800&gt;
+        exc_type   = &lt;class 'TypeError'&gt;
+        exc_value  = TypeError("'name' is an invalid keyword argument for Workout")
+        self       = &lt;sqlalchemy.util.langhelpers.safe_reraise object at 0x10426ddb0&gt;
+        traceback  = None
+        type_      = None
+        value      = None
+venv/lib/python3.10/site-packages/sqlalchemy/orm/state.py:569: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+        args       = ()
+        instance   = &lt;Workout None: None&gt;
+        kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+        manager    = &lt;ClassManager of &lt;class 'app.models.workout.Workout'&gt; at 1033e33d0&gt;
+        mixed      = (&lt;sqlalchemy.orm.state.InstanceState object at 0x10435cc40&gt;, &lt;Workout None: None&gt;)
+        self       = &lt;sqlalchemy.orm.state.InstanceState object at 0x10435cc40&gt;
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;Workout None: None&gt;
+kwargs = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+cls_ = &lt;class 'app.models.workout.Workout'&gt;, k = 'name'
+
+    def _declarative_constructor(self: Any, **kwargs: Any) -&gt; None:
+        """A simple constructor that allows initialization from kwargs.
+    
+        Sets attributes on the constructed instance using the names and
+        values in ``kwargs``.
+    
+        Only keys that are present as
+        attributes of the instance's class are allowed. These could be,
+        for example, any mapped columns or relationships.
+        """
+        cls_ = type(self)
+        for k in kwargs:
+            if not hasattr(cls_, k):
+&gt;               raise TypeError(
+                    "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+                )
+E               TypeError: 'name' is an invalid keyword argument for Workout
+
+cls_       = &lt;class 'app.models.workout.Workout'&gt;
+k          = 'name'
+kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+self       = &lt;Workout None: None&gt;
+
+venv/lib/python3.10/site-packages/sqlalchemy/orm/decl_base.py:2173: TypeError</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_assignment_routes" name="test_create_assignment_missing_workout_id" time="0.044"><failure message="KeyError: 'headers'">client = &lt;FlaskClient &lt;Flask 'app'&gt;&gt;
+auth_headers = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MTk5NzU4NiwianRpIjoiYzF...wZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzUxOTk3NTg2LCJleHAiOjE3NTE5OTc4ODZ9.kOsDuk5ERPQGRv28xhy7A7ZHq7mqRzM0lNER9ZaHZ8c'}
+
+    def test_create_assignment_missing_workout_id(client, auth_headers):
+        """Test creating an assignment without workout_id"""
+        # Make the request
+        response = client.post(
+            '/api/assignments',
+&gt;           headers=auth_headers['headers'],
+            json={}
+        )
+E       KeyError: 'headers'
+
+auth_headers = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MTk5NzU4NiwianRpIjoiYzF...wZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzUxOTk3NTg2LCJleHAiOjE3NTE5OTc4ODZ9.kOsDuk5ERPQGRv28xhy7A7ZHq7mqRzM0lNER9ZaHZ8c'}
+client     = &lt;FlaskClient &lt;Flask 'app'&gt;&gt;
+
+tests/routes/test_assignment_routes.py:26: KeyError</failure></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_assignment_routes" name="test_get_user_assignments" time="0.043"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py, line 36&#10;  def test_get_user_assignments(client, auth_headers, test_assignment):&#10;E       fixture 'test_assignment' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py:36&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py, line 36
+  def test_get_user_assignments(client, auth_headers, test_assignment):
+E       fixture 'test_assignment' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py:36</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_assignment_routes" name="test_delete_assignment" time="0.064"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py, line 51&#10;  def test_delete_assignment(client, auth_headers, test_assignment):&#10;E       fixture 'test_assignment' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py:51&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py, line 51
+  def test_delete_assignment(client, auth_headers, test_assignment):
+E       fixture 'test_assignment' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py:51</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_assignment_routes" name="test_delete_nonexistent_assignment" time="0.041"><failure message="KeyError: 'headers'">client = &lt;FlaskClient &lt;Flask 'app'&gt;&gt;
+auth_headers = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MTk5NzU4NiwianRpIjoiNGU...wZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzUxOTk3NTg2LCJleHAiOjE3NTE5OTc4ODZ9.1p6CeDZnHsozzHx0faGYZ3xqFHmuIKb9_SrdMJLGSPs'}
+
+    def test_delete_nonexistent_assignment(client, auth_headers):
+        """Test deleting a non-existent assignment"""
+        # Make the request
+        response = client.delete(
+            '/api/assignments/999',
+&gt;           headers=auth_headers['headers']
+        )
+E       KeyError: 'headers'
+
+auth_headers = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MTk5NzU4NiwianRpIjoiNGU...wZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzUxOTk3NTg2LCJleHAiOjE3NTE5OTc4ODZ9.1p6CeDZnHsozzHx0faGYZ3xqFHmuIKb9_SrdMJLGSPs'}
+client     = &lt;FlaskClient &lt;Flask 'app'&gt;&gt;
+
+tests/routes/test_assignment_routes.py:75: KeyError</failure></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_assignment_routes" name="test_replace_assignment" time="0.042"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py, line 84&#10;  def test_replace_assignment(client, auth_headers, test_assignment):&#10;E       fixture 'test_assignment' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py:84&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py, line 84
+  def test_replace_assignment(client, auth_headers, test_assignment):
+E       fixture 'test_assignment' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py:84</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_assignment_routes" name="test_mark_assignment_complete" time="0.043"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py, line 127&#10;  def test_mark_assignment_complete(client, auth_headers, test_assignment):&#10;E       fixture 'test_assignment' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py:127&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py, line 127
+  def test_mark_assignment_complete(client, auth_headers, test_assignment):
+E       fixture 'test_assignment' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_assignment_routes.py:127</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_dashboard_routes" name="test_dashboard_endpoint_requires_login" time="0.013"><failure message="assert 404 == 302&#10; +  where 404 = &lt;WrapperTestResponse streamed [404 NOT FOUND]&gt;.status_code">client = &lt;FlaskClient &lt;Flask 'app'&gt;&gt;
+
+    def test_dashboard_endpoint_requires_login(client):
+        """Test that the dashboard page requires login."""
+        response = client.get('/dashboard')
+        # Should redirect to login page
+&gt;       assert response.status_code == 302
+E       assert 404 == 302
+E        +  where 404 = &lt;WrapperTestResponse streamed [404 NOT FOUND]&gt;.status_code
+
+client     = &lt;FlaskClient &lt;Flask 'app'&gt;&gt;
+response   = &lt;WrapperTestResponse streamed [404 NOT FOUND]&gt;
+
+tests/routes/test_dashboard_routes.py:9: AssertionError</failure></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_dashboard_routes" name="test_dashboard_endpoint_logged_in" time="0.001"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 12&#10;  def test_dashboard_endpoint_logged_in(logged_in_client):&#10;E       fixture 'logged_in_client' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:12&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 12
+  def test_dashboard_endpoint_logged_in(logged_in_client):
+E       fixture 'logged_in_client' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:12</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_dashboard_routes" name="test_user_workouts_endpoint_authentication" time="0.012"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 20&#10;  def test_user_workouts_endpoint_authentication(client, init_database):&#10;E       fixture 'init_database' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:20&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 20
+  def test_user_workouts_endpoint_authentication(client, init_database):
+E       fixture 'init_database' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:20</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_dashboard_routes" name="test_user_workouts_endpoint_own_data" time="0.000"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 29&#10;  def test_user_workouts_endpoint_own_data(logged_in_client, init_database):&#10;E       fixture 'logged_in_client' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:29&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 29
+  def test_user_workouts_endpoint_own_data(logged_in_client, init_database):
+E       fixture 'logged_in_client' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:29</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_dashboard_routes" name="test_user_workouts_endpoint_other_user" time="0.000"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 49&#10;  def test_user_workouts_endpoint_other_user(logged_in_client, init_database):&#10;E       fixture 'logged_in_client' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:49&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 49
+  def test_user_workouts_endpoint_other_user(logged_in_client, init_database):
+E       fixture 'logged_in_client' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:49</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_dashboard_routes" name="test_admin_access_any_user_workouts" time="0.000"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 60&#10;  def test_admin_access_any_user_workouts(logged_in_admin, init_database):&#10;E       fixture 'logged_in_admin' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:60&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 60
+  def test_admin_access_any_user_workouts(logged_in_admin, init_database):
+E       fixture 'logged_in_admin' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:60</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_dashboard_routes" name="test_start_workout_session_endpoint_requires_login" time="0.012"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 72&#10;  def test_start_workout_session_endpoint_requires_login(client, init_database):&#10;E       fixture 'init_database' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:72&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 72
+  def test_start_workout_session_endpoint_requires_login(client, init_database):
+E       fixture 'init_database' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:72</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_dashboard_routes" name="test_start_workout_session_endpoint_assigned" time="0.000"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 80&#10;  def test_start_workout_session_endpoint_assigned(logged_in_client, init_database):&#10;E       fixture 'logged_in_client' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:80&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 80
+  def test_start_workout_session_endpoint_assigned(logged_in_client, init_database):
+E       fixture 'logged_in_client' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:80</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_dashboard_routes" name="test_start_workout_session_endpoint_not_assigned" time="0.001"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 86&#10;  def test_start_workout_session_endpoint_not_assigned(logged_in_client, init_database):&#10;E       fixture 'logged_in_client' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:86&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 86
+  def test_start_workout_session_endpoint_not_assigned(logged_in_client, init_database):
+E       fixture 'logged_in_client' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:86</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_dashboard_routes" name="test_start_workout_session_endpoint_nonexistent" time="0.000"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 92&#10;  def test_start_workout_session_endpoint_nonexistent(logged_in_client):&#10;E       fixture 'logged_in_client' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:92&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py, line 92
+  def test_start_workout_session_endpoint_nonexistent(logged_in_client):
+E       fixture 'logged_in_client' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_dashboard_routes.py:92</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_session_log_routes.TestSessionLogRoutes" name="test_create_session_log" time="0.043"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py, line 7&#10;      def test_create_session_log(self, client, auth_headers, test_user, test_exercises, test_workout_assignment):&#10;E       fixture 'test_exercises' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py:7&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py, line 7
+      def test_create_session_log(self, client, auth_headers, test_user, test_exercises, test_workout_assignment):
+E       fixture 'test_exercises' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py:7</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_session_log_routes.TestSessionLogRoutes" name="test_get_session_logs" time="0.042"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py, line 65&#10;      def test_get_session_logs(self, client, auth_headers, test_user, test_workout_session):&#10;E       fixture 'test_workout_session' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py:65&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py, line 65
+      def test_get_session_logs(self, client, auth_headers, test_user, test_workout_session):
+E       fixture 'test_workout_session' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py:65</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_session_log_routes.TestSessionLogRoutes" name="test_get_single_session_log" time="0.043"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py, line 106&#10;      def test_get_single_session_log(self, client, auth_headers, test_workout_session):&#10;E       fixture 'test_workout_session' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py:106&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py, line 106
+      def test_get_single_session_log(self, client, auth_headers, test_workout_session):
+E       fixture 'test_workout_session' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py:106</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_session_log_routes.TestSessionLogRoutes" name="test_update_session_log" time="0.042"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py, line 139&#10;      def test_update_session_log(self, client, auth_headers, test_workout_session):&#10;E       fixture 'test_workout_session' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py:139&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py, line 139
+      def test_update_session_log(self, client, auth_headers, test_workout_session):
+E       fixture 'test_workout_session' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py:139</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.routes.test_session_log_routes.TestSessionLogRoutes" name="test_delete_session_log" time="0.045"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py, line 168&#10;      def test_delete_session_log(self, client, auth_headers, test_workout_session):&#10;E       fixture 'test_workout_session' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py:168&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py, line 168
+      def test_delete_session_log(self, client, auth_headers, test_workout_session):
+E       fixture 'test_workout_session' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/routes/test_session_log_routes.py:168</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.schemas.test_session_log_schema.TestSessionLogSchema" name="test_session_log_serialization" time="0.012"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/schemas/test_session_log_schema.py, line 120&#10;      def test_session_log_serialization(self, app, test_workout_session):&#10;E       fixture 'test_workout_session' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/schemas/test_session_log_schema.py:120&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/schemas/test_session_log_schema.py, line 120
+      def test_session_log_serialization(self, app, test_workout_session):
+E       fixture 'test_workout_session' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/schemas/test_session_log_schema.py:120</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.schemas.test_session_log_schema.TestSessionLogSchema" name="test_multiple_sessions_serialization" time="0.013"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/schemas/test_session_log_schema.py, line 163&#10;      def test_multiple_sessions_serialization(self, app, test_workout_session):&#10;E       fixture 'test_workout_session' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/schemas/test_session_log_schema.py:163&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/schemas/test_session_log_schema.py, line 163
+      def test_multiple_sessions_serialization(self, app, test_workout_session):
+E       fixture 'test_workout_session' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/schemas/test_session_log_schema.py:163</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_assignment_service" name="test_create_assignment_success" time="0.044"><error message="failed on setup with &quot;TypeError: 'name' is an invalid keyword argument for Workout&quot;">app = &lt;Flask 'app'&gt;, test_user = &lt;User testuser: User&gt;
+
+    @pytest.fixture
+    def test_workout(app, test_user):
+        """Create a test workout for the test user."""
+        with app.app_context():
+&gt;           workout = Workout(
+                name="Test Workout",
+                description="Test workout description",
+                workout_type="strength",
+                focus_area="upper body",
+                difficulty="beginner",
+                duration_minutes=30,
+                user_id=test_user.id
+            )
+
+app        = &lt;Flask 'app'&gt;
+test_user  = &lt;User testuser: User&gt;
+
+tests/conftest.py:451: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+venv/lib/python3.10/site-packages/sqlalchemy/orm/state.py:571: in _initialize_instance
+    with util.safe_reraise():
+        args       = ()
+        instance   = &lt;Workout None: None&gt;
+        kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+        manager    = &lt;ClassManager of &lt;class 'app.models.workout.Workout'&gt; at 1033e33d0&gt;
+        mixed      = (&lt;sqlalchemy.orm.state.InstanceState object at 0x104879fc0&gt;, &lt;Workout None: None&gt;)
+        self       = &lt;sqlalchemy.orm.state.InstanceState object at 0x104879fc0&gt;
+venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py:224: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+        exc_tb     = &lt;traceback object at 0x104928c40&gt;
+        exc_type   = &lt;class 'TypeError'&gt;
+        exc_value  = TypeError("'name' is an invalid keyword argument for Workout")
+        self       = &lt;sqlalchemy.util.langhelpers.safe_reraise object at 0x104962290&gt;
+        traceback  = None
+        type_      = None
+        value      = None
+venv/lib/python3.10/site-packages/sqlalchemy/orm/state.py:569: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+        args       = ()
+        instance   = &lt;Workout None: None&gt;
+        kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+        manager    = &lt;ClassManager of &lt;class 'app.models.workout.Workout'&gt; at 1033e33d0&gt;
+        mixed      = (&lt;sqlalchemy.orm.state.InstanceState object at 0x104879fc0&gt;, &lt;Workout None: None&gt;)
+        self       = &lt;sqlalchemy.orm.state.InstanceState object at 0x104879fc0&gt;
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;Workout None: None&gt;
+kwargs = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+cls_ = &lt;class 'app.models.workout.Workout'&gt;, k = 'name'
+
+    def _declarative_constructor(self: Any, **kwargs: Any) -&gt; None:
+        """A simple constructor that allows initialization from kwargs.
+    
+        Sets attributes on the constructed instance using the names and
+        values in ``kwargs``.
+    
+        Only keys that are present as
+        attributes of the instance's class are allowed. These could be,
+        for example, any mapped columns or relationships.
+        """
+        cls_ = type(self)
+        for k in kwargs:
+            if not hasattr(cls_, k):
+&gt;               raise TypeError(
+                    "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+                )
+E               TypeError: 'name' is an invalid keyword argument for Workout
+
+cls_       = &lt;class 'app.models.workout.Workout'&gt;
+k          = 'name'
+kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+self       = &lt;Workout None: None&gt;
+
+venv/lib/python3.10/site-packages/sqlalchemy/orm/decl_base.py:2173: TypeError</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_assignment_service" name="test_create_assignment_duplicate" time="0.044"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py, line 26&#10;  def test_create_assignment_duplicate(app, auth_headers, test_assignment):&#10;E       fixture 'test_assignment' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py:26&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py, line 26
+  def test_create_assignment_duplicate(app, auth_headers, test_assignment):
+E       fixture 'test_assignment' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py:26</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_assignment_service" name="test_create_assignment_invalid_user" time="0.044"><error message="failed on setup with &quot;TypeError: 'name' is an invalid keyword argument for Workout&quot;">app = &lt;Flask 'app'&gt;, test_user = &lt;User testuser: User&gt;
+
+    @pytest.fixture
+    def test_workout(app, test_user):
+        """Create a test workout for the test user."""
+        with app.app_context():
+&gt;           workout = Workout(
+                name="Test Workout",
+                description="Test workout description",
+                workout_type="strength",
+                focus_area="upper body",
+                difficulty="beginner",
+                duration_minutes=30,
+                user_id=test_user.id
+            )
+
+app        = &lt;Flask 'app'&gt;
+test_user  = &lt;User testuser: User&gt;
+
+tests/conftest.py:451: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+venv/lib/python3.10/site-packages/sqlalchemy/orm/state.py:571: in _initialize_instance
+    with util.safe_reraise():
+        args       = ()
+        instance   = &lt;Workout None: None&gt;
+        kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+        manager    = &lt;ClassManager of &lt;class 'app.models.workout.Workout'&gt; at 1033e33d0&gt;
+        mixed      = (&lt;sqlalchemy.orm.state.InstanceState object at 0x1046c4820&gt;, &lt;Workout None: None&gt;)
+        self       = &lt;sqlalchemy.orm.state.InstanceState object at 0x1046c4820&gt;
+venv/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py:224: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+        exc_tb     = &lt;traceback object at 0x1046cc980&gt;
+        exc_type   = &lt;class 'TypeError'&gt;
+        exc_value  = TypeError("'name' is an invalid keyword argument for Workout")
+        self       = &lt;sqlalchemy.util.langhelpers.safe_reraise object at 0x1049a8100&gt;
+        traceback  = None
+        type_      = None
+        value      = None
+venv/lib/python3.10/site-packages/sqlalchemy/orm/state.py:569: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+        args       = ()
+        instance   = &lt;Workout None: None&gt;
+        kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+        manager    = &lt;ClassManager of &lt;class 'app.models.workout.Workout'&gt; at 1033e33d0&gt;
+        mixed      = (&lt;sqlalchemy.orm.state.InstanceState object at 0x1046c4820&gt;, &lt;Workout None: None&gt;)
+        self       = &lt;sqlalchemy.orm.state.InstanceState object at 0x1046c4820&gt;
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;Workout None: None&gt;
+kwargs = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+cls_ = &lt;class 'app.models.workout.Workout'&gt;, k = 'name'
+
+    def _declarative_constructor(self: Any, **kwargs: Any) -&gt; None:
+        """A simple constructor that allows initialization from kwargs.
+    
+        Sets attributes on the constructed instance using the names and
+        values in ``kwargs``.
+    
+        Only keys that are present as
+        attributes of the instance's class are allowed. These could be,
+        for example, any mapped columns or relationships.
+        """
+        cls_ = type(self)
+        for k in kwargs:
+            if not hasattr(cls_, k):
+&gt;               raise TypeError(
+                    "%r is an invalid keyword argument for %s" % (k, cls_.__name__)
+                )
+E               TypeError: 'name' is an invalid keyword argument for Workout
+
+cls_       = &lt;class 'app.models.workout.Workout'&gt;
+k          = 'name'
+kwargs     = {'description': 'Test workout description', 'difficulty': 'beginner', 'duration_minutes': 30, 'focus_area': 'upper body', ...}
+self       = &lt;Workout None: None&gt;
+
+venv/lib/python3.10/site-packages/sqlalchemy/orm/decl_base.py:2173: TypeError</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_assignment_service" name="test_create_assignment_invalid_workout" time="0.046"><failure message="KeyError: 'user'">app = &lt;Flask 'app'&gt;
+auth_headers = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MTk5NzU4NiwianRpIjoiNzk...wZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzUxOTk3NTg2LCJleHAiOjE3NTE5OTc4ODZ9.eA63-aQ6S_QENR17eCx5rFocwirmhJFV8uZ79L2sU2Q'}
+
+    def test_create_assignment_invalid_workout(app, auth_headers):
+        """Test creating an assignment with invalid workout"""
+        with app.app_context():
+&gt;           user = auth_headers['user']
+E           KeyError: 'user'
+
+app        = &lt;Flask 'app'&gt;
+auth_headers = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MTk5NzU4NiwianRpIjoiNzk...wZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzUxOTk3NTg2LCJleHAiOjE3NTE5OTc4ODZ9.eA63-aQ6S_QENR17eCx5rFocwirmhJFV8uZ79L2sU2Q'}
+
+tests/test_services/test_assignment_service.py:60: KeyError</failure></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_assignment_service" name="test_remove_assignment_success" time="0.012"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py, line 73&#10;  def test_remove_assignment_success(app, test_assignment):&#10;E       fixture 'test_assignment' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py:73&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py, line 73
+  def test_remove_assignment_success(app, test_assignment):
+E       fixture 'test_assignment' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py:73</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_assignment_service" name="test_remove_assignment_not_found" time="0.044"><failure message="KeyError: 'user'">app = &lt;Flask 'app'&gt;
+auth_headers = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MTk5NzU4NywianRpIjoiNjg...wZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzUxOTk3NTg3LCJleHAiOjE3NTE5OTc4ODd9.xIf3sQBNXg2rd1kbDeVPUWVtaTXMudiQVxx9A6DaVbI'}
+
+    def test_remove_assignment_not_found(app, auth_headers):
+        """Test removing a non-existent assignment"""
+        with app.app_context():
+&gt;           user = auth_headers['user']
+E           KeyError: 'user'
+
+app        = &lt;Flask 'app'&gt;
+auth_headers = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MTk5NzU4NywianRpIjoiNjg...wZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzUxOTk3NTg3LCJleHAiOjE3NTE5OTc4ODd9.xIf3sQBNXg2rd1kbDeVPUWVtaTXMudiQVxx9A6DaVbI'}
+
+tests/test_services/test_assignment_service.py:95: KeyError</failure></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_assignment_service" name="test_replace_assignment_success" time="0.043"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py, line 108&#10;  def test_replace_assignment_success(app, auth_headers, test_assignment, test_workout):&#10;E       fixture 'test_assignment' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py:108&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py, line 108
+  def test_replace_assignment_success(app, auth_headers, test_assignment, test_workout):
+E       fixture 'test_assignment' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py:108</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_assignment_service" name="test_replace_assignment_same_workout" time="0.044"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py, line 147&#10;  def test_replace_assignment_same_workout(app, auth_headers, test_assignment):&#10;E       fixture 'test_assignment' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py:147&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py, line 147
+  def test_replace_assignment_same_workout(app, auth_headers, test_assignment):
+E       fixture 'test_assignment' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py:147</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_assignment_service" name="test_replace_assignment_invalid_workout" time="0.045"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py, line 164&#10;  def test_replace_assignment_invalid_workout(app, auth_headers, test_assignment):&#10;E       fixture 'test_assignment' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py:164&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py, line 164
+  def test_replace_assignment_invalid_workout(app, auth_headers, test_assignment):
+E       fixture 'test_assignment' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py:164</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_assignment_service" name="test_mark_assignment_complete" time="0.012"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py, line 184&#10;  def test_mark_assignment_complete(app, test_assignment):&#10;E       fixture 'test_assignment' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py:184&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py, line 184
+  def test_mark_assignment_complete(app, test_assignment):
+E       fixture 'test_assignment' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py:184</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_assignment_service" name="test_get_user_assignments" time="0.044"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py, line 200&#10;  def test_get_user_assignments(app, auth_headers, test_assignment):&#10;E       fixture 'test_assignment' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py:200&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py, line 200
+  def test_get_user_assignments(app, auth_headers, test_assignment):
+E       fixture 'test_assignment' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_assignment_service.py:200</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_session_log_service.TestSessionLogService" name="test_create_session_log" time="0.071"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py, line 8&#10;      def test_create_session_log(self, app, test_user, test_exercises, test_workout_assignment):&#10;E       fixture 'test_exercises' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py:8&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py, line 8
+      def test_create_session_log(self, app, test_user, test_exercises, test_workout_assignment):
+E       fixture 'test_exercises' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py:8</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_session_log_service.TestSessionLogService" name="test_get_session_logs_with_filters" time="0.044"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py, line 81&#10;      def test_get_session_logs_with_filters(self, app, test_user, test_workout_session):&#10;E       fixture 'test_workout_session' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py:81&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py, line 81
+      def test_get_session_logs_with_filters(self, app, test_user, test_workout_session):
+E       fixture 'test_workout_session' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py:81</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_session_log_service.TestSessionLogService" name="test_get_session_log_by_id" time="0.012"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py, line 124&#10;      def test_get_session_log_by_id(self, app, test_workout_session):&#10;E       fixture 'test_workout_session' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py:124&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py, line 124
+      def test_get_session_log_by_id(self, app, test_workout_session):
+E       fixture 'test_workout_session' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py:124</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_session_log_service.TestSessionLogService" name="test_update_session_log" time="0.013"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py, line 138&#10;      def test_update_session_log(self, app, test_workout_session):&#10;E       fixture 'test_workout_session' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py:138&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py, line 138
+      def test_update_session_log(self, app, test_workout_session):
+E       fixture 'test_workout_session' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py:138</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_session_log_service.TestSessionLogService" name="test_delete_session_log" time="0.012"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py, line 159&#10;      def test_delete_session_log(self, app, test_workout_session):&#10;E       fixture 'test_workout_session' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py:159&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py, line 159
+      def test_delete_session_log(self, app, test_workout_session):
+E       fixture 'test_workout_session' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_session_log_service.py:159</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_workout_service" name="test_get_user_assigned_workouts" time="0.001"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py, line 5&#10;  def test_get_user_assigned_workouts(init_database):&#10;E       fixture 'init_database' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py:5&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py, line 5
+  def test_get_user_assigned_workouts(init_database):
+E       fixture 'init_database' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py:5</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_workout_service" name="test_get_user_assigned_workouts_empty" time="0.001"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py, line 25&#10;  def test_get_user_assigned_workouts_empty(init_database):&#10;E       fixture 'init_database' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py:25&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py, line 25
+  def test_get_user_assigned_workouts_empty(init_database):
+E       fixture 'init_database' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py:25</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_workout_service" name="test_is_workout_assigned_to_user" time="0.000"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py, line 40&#10;  def test_is_workout_assigned_to_user(init_database):&#10;E       fixture 'init_database' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py:40&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py, line 40
+  def test_is_workout_assigned_to_user(init_database):
+E       fixture 'init_database' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py:40</error></testcase><testcase classname="Downloads.Fittrack.FitTrack.tests.test_services.test_workout_service" name="test_is_workout_assigned_to_user_nonexistent" time="0.001"><error message="failed on setup with &quot;file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py, line 63&#10;  def test_is_workout_assigned_to_user_nonexistent(init_database):&#10;E       fixture 'init_database' not found&#10;&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py:63&quot;">file /Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py, line 63
+  def test_is_workout_assigned_to_user_nonexistent(init_database):
+E       fixture 'init_database' not found
+&gt;       available fixtures: admin_auth_headers, admin_auth_token, app, auth_headers, auth_token, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, test_admin_user, test_user, test_workout, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/tejwani/Downloads/Fittrack/FitTrack/tests/test_services/test_workout_service.py:63</error></testcase></testsuite></testsuites>
