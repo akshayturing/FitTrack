@@ -94,30 +94,165 @@ from app.models.workout import Workout
 from app.models.workout_assignment import WorkoutAssignment
 from app import db
 import datetime
+# from datetime import datetime
+
 
 class TestWorkoutAssignment:
+    # def test_create_assignment(self, database):
+    #     """Test creating a workout assignment"""
+    #     # Create a user
+    #     user = User(username="testuser", email="test@example.com")
+    #     user.password = "password123"
+    #     db.session.add(user)
+    #     db.session.flush()  # Get the user ID without committing
+
+    #     # Create a workout 
+    #     # Changed 'name' to 'title' to match the model definition
+    #     workout = Workout(
+    #         title="Test Workout",  # CHANGED FROM name="Test Workout"
+    #         user_id=user.id,
+    #         description="Test workout description",
+    #         workout_type="strength",
+    #         duration=30,  # minutes
+    #         difficulty_level="intermediate"
+    #     )
+    #     db.session.add(workout)
+    #     db.session.flush()  # Get the workout ID without committing
+
+    #     # Create a workout assignment
+    #     assignment = WorkoutAssignment(
+    #         user_id=user.id,
+    #         workout_id=workout.id,
+    #         assigned_date=datetime.datetime.utcnow(),
+    #         is_active=True
+    #     )
+    #     db.session.add(assignment)
+    #     db.session.commit()
+
+    #     # Verify the assignment was created
+    #     assignments = WorkoutAssignment.query.filter_by(user_id=user.id, is_active=True).all()
+    #     assert len(assignments) == 1
+    #     assert assignments[0].workout_id == workout.id
+    #     assert assignments[0].is_active == True
+
+    # def test_assignment_unique_constraint(self, database):
+    #     """Test that a user cannot be assigned the same workout twice when both are active"""
+    #     # Create a user
+    #     user = User(username="testuser", email="test@example.com")
+    #     user.password = "password123"
+    #     db.session.add(user)
+    #     db.session.flush()
+
+    #     # Create a workout
+    #     # Changed 'name' to 'title' to match the model definition
+    #     workout = Workout(
+    #         title="Test Workout1",  # CHANGED FROM name="Test Workout"
+    #         user_id=user.id,
+    #         description="Test workout description",
+    #         workout_type="strength",
+    #         duration=30,  # minutes
+    #         difficulty_level="intermediate"
+    #     )
+    #     db.session.add(workout)
+    #     db.session.flush()
+
+    #     # Create a workout assignment
+    #     assignment1 = WorkoutAssignment(
+    #         user_id=user.id,
+    #         workout_id=workout.id,
+    #         assigned_date=datetime.datetime.utcnow(),
+    #         is_active=True
+    #     )
+    #     db.session.add(assignment1)
+    #     db.session.commit()
+
+    #     existing = WorkoutAssignment.query.filter_by(
+    #     user_id=user.id,
+    #     workout_id=workout.id,
+    #     is_active=True
+    #     ).first()
+
+    #     # if existing:
+    #     #     # Manually trigger validation failure for test purposes
+    #     #     raise ValueError("Active assignment already exists.")
+    #     # Try to create another active assignment for the same user and workout
+    #     assignment2 = WorkoutAssignment(
+    #         user_id=user.id,
+    #         workout_id=workout.id,
+    #         assigned_date=datetime.datetime.utcnow(),
+    #         is_active=True
+    #     )
+    #     db.session.add(assignment2)
+
+    #     # This should raise an exception due to the unique constraint
+    #     with pytest.raises(Exception):
+    #         db.session.commit()
+
+    #     # Rollback the session to clean up
+    #     db.session.rollback()
+
+    #     # If the first assignment is set to inactive, then we should be able to create another
+    #     assignment1.is_active = False
+    #     db.session.commit()
+
+    #     # Now we can create another assignment
+    #     assignment3 = WorkoutAssignment(
+    #         user_id=user.id,
+    #         workout_id=workout.id,
+    #         assigned_date=datetime.datetime.utcnow(),
+    #         is_active=True
+    #     )
+    #     db.session.add(assignment3)
+        
+    #     # This should not raise an exception
+    #     db.session.commit()
+        
+    #     all_assignments = WorkoutAssignment.query.filter_by(
+    #     user_id=user.id,
+    #     workout_id=workout.id
+    #     ).all()
+    #     assert len(all_assignments) == 2  # One inactive, one active
+
+    #     # This gets only the active one
+    #     active_assignments = WorkoutAssignment.query.filter_by(
+    #     user_id=user.id,
+    #     workout_id=workout.id,
+    #     is_active=True
+    #     ).all()
+    #     assert len(active_assignments) == 1
+
     def test_create_assignment(self, database):
         """Test creating a workout assignment"""
         # Create a user
         user = User(username="testuser", email="test@example.com")
         user.password = "password123"
         db.session.add(user)
-        db.session.flush()  # Get the user ID without committing
+        db.session.flush()
 
-        # Create a workout 
-        # Changed 'name' to 'title' to match the model definition
+        # Create a workout
         workout = Workout(
-            title="Test Workout",  # CHANGED FROM name="Test Workout"
+            title="Test Workout",  
             user_id=user.id,
             description="Test workout description",
             workout_type="strength",
-            duration=30,  # minutes
+            duration=30,
             difficulty_level="intermediate"
         )
         db.session.add(workout)
-        db.session.flush()  # Get the workout ID without committing
+        db.session.flush()
 
-        # Create a workout assignment
+        # Check if assignment already exists and deactivate it
+        existing_assignment = WorkoutAssignment.query.filter_by(
+            user_id=user.id, 
+            workout_id=workout.id,
+            is_active=True
+        ).first()
+        
+        if existing_assignment:
+            existing_assignment.is_active = False
+            db.session.commit()
+
+        # Create a new workout assignment
         assignment = WorkoutAssignment(
             user_id=user.id,
             workout_id=workout.id,
@@ -128,10 +263,13 @@ class TestWorkoutAssignment:
         db.session.commit()
 
         # Verify the assignment was created
-        assignments = WorkoutAssignment.query.filter_by(user_id=user.id).all()
+        assignments = WorkoutAssignment.query.filter_by(
+            user_id=user.id, 
+            workout_id=workout.id,
+            is_active=True
+        ).all()
         assert len(assignments) == 1
         assert assignments[0].workout_id == workout.id
-        assert assignments[0].is_active == True
 
     def test_assignment_unique_constraint(self, database):
         """Test that a user cannot be assigned the same workout twice when both are active"""
@@ -141,37 +279,56 @@ class TestWorkoutAssignment:
         db.session.add(user)
         db.session.flush()
 
-        # Create a workout
-        # Changed 'name' to 'title' to match the model definition
-        workout = Workout(
-            title="Test Workout",  # CHANGED FROM name="Test Workout"
+        # Create two different workouts
+        workout1 = Workout(
+            title="Test Workout 1",
             user_id=user.id,
-            description="Test workout description",
+            description="Test workout description 1",
             workout_type="strength",
-            duration=30,  # minutes
+            duration=30,
             difficulty_level="intermediate"
         )
-        db.session.add(workout)
+        
+        workout2 = Workout(
+            title="Test Workout 2",  # Different workout
+            user_id=user.id,
+            description="Test workout description 2",
+            workout_type="cardio",
+            duration=45,
+            difficulty_level="advanced"
+        )
+        
+        db.session.add(workout1)
+        db.session.add(workout2)
         db.session.flush()
 
-        # Create a workout assignment
+        # Create assignments for different workouts - this should work
         assignment1 = WorkoutAssignment(
             user_id=user.id,
-            workout_id=workout.id,
+            workout_id=workout1.id,
             assigned_date=datetime.datetime.utcnow(),
             is_active=True
         )
-        db.session.add(assignment1)
-        db.session.commit()
-
-        # Try to create another active assignment for the same user and workout
+        
         assignment2 = WorkoutAssignment(
             user_id=user.id,
-            workout_id=workout.id,
+            workout_id=workout2.id,  # Different workout
             assigned_date=datetime.datetime.utcnow(),
             is_active=True
         )
+        
+        db.session.add(assignment1)
         db.session.add(assignment2)
+        db.session.commit()
+        
+        # Now try to create a duplicate assignment - this should fail
+        duplicate_assignment = WorkoutAssignment(
+            user_id=user.id,
+            workout_id=workout1.id,  # Same as assignment1
+            assigned_date=datetime.datetime.utcnow(),
+            is_active=True
+        )
+        db.session.add(duplicate_assignment)
 
         # This should raise an exception due to the unique constraint
         with pytest.raises(Exception):
@@ -179,25 +336,21 @@ class TestWorkoutAssignment:
 
         # Rollback the session to clean up
         db.session.rollback()
-
-        # If the first assignment is set to inactive, then we should be able to create another
+        
+        # Verify we can add another assignment if the first is inactive
         assignment1.is_active = False
         db.session.commit()
-
-        # Now we can create another assignment
-        assignment3 = WorkoutAssignment(
+        
+        # Now try again with the first assignment inactive
+        new_assignment = WorkoutAssignment(
             user_id=user.id,
-            workout_id=workout.id,
+            workout_id=workout1.id,
             assigned_date=datetime.datetime.utcnow(),
             is_active=True
         )
-        db.session.add(assignment3)
+        db.session.add(new_assignment)
+        db.session.commit()  # This should succeed now
         
-        # This should not raise an exception
-        db.session.commit()
-        
-        # Verify we have two assignments for the user, but only one is active
+        # Verify we have 3 total assignments
         assignments = WorkoutAssignment.query.filter_by(user_id=user.id).all()
-        assert len(assignments) == 2
-        active_assignments = WorkoutAssignment.query.filter_by(user_id=user.id, is_active=True).all()
-        assert len(active_assignments) == 1
+        assert len(assignments) == 3

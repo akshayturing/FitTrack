@@ -71,11 +71,11 @@ class WorkoutAssignment(db.Model):
     assigned_date = db.Column(db.DateTime, default=datetime.utcnow)
     completed = db.Column(db.Boolean, default=False)
     completion_date = db.Column(db.DateTime)
-    
+    is_active = db.Column(db.Boolean, default=True)
     
     __table_args__ = (
         # Enforce uniqueness for user and workout combination
-        db.UniqueConstraint('user_id', 'workout_id', name='uix_user_workout_assignment'),
+        db.UniqueConstraint('user_id', 'workout_id', 'is_active', name='uix_user_workout_assignment'),
         # Composite index for frequent status checks
         db.Index('idx_assignment_user_status', 'user_id', 'status'),
         # Index for finding assignments within date ranges

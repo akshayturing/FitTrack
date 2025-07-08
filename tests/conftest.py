@@ -414,6 +414,13 @@ def test_user(app):
         # Make sure this matches your User model's method for setting passwords
         # user.set_password("securepass123")
         user.password = "securepass123"
+        user1 = User(
+            username="testuser",
+            email="user@example.com",
+        )
+        # Make sure this matches your User model's method for setting passwords
+        # user.set_password("securepass123")
+        user1.password = "securepass123"
         db.session.add(user)
         db.session.commit()
         
@@ -433,6 +440,7 @@ def test_admin_user(app):
             email="admin@example.com",
             is_admin=True
         )
+        
         # user.set_password("adminpass123")
         user.password = "securepass123"
         db.session.add(user)
@@ -509,3 +517,23 @@ def admin_auth_headers(admin_auth_token):
     properly for use in HTTP Authorization header.
     """
     return {'Authorization': f'Bearer {admin_auth_token}'}
+
+@pytest.fixture(scope='function')
+def database(app):
+    """
+    Create a fresh database for each test function.
+    
+    This fixture depends on the app fixture and provides a database session
+    that is reset after each test, ensuring test isolation.
+    """
+    # Set up: create tables and prepare session
+    with app.app_context():
+        # Create all tables
+        db.create_all()
+        
+        # Provide the session for the test
+        yield db
+        
+        # Tear down: clear session and drop all tables
+        db.session.remove()
+        db.drop_all()

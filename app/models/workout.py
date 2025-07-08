@@ -50,6 +50,11 @@ class Workout(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     user = db.relationship("User", back_populates="workouts", foreign_keys=[user_id])
+    is_active = db.Column(db.Boolean, default=True)
+    __table_args__ = (
+        db.UniqueConstraint('user_id', 'id', 'is_active', 
+                       name='uq_workout_assignment_active'),
+    )
     assignments = db.relationship(
         'WorkoutAssignment',
         foreign_keys='WorkoutAssignment.workout_id',
