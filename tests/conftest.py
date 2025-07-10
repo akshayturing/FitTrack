@@ -414,6 +414,13 @@ def test_user(app):
         # Make sure this matches your User model's method for setting passwords
         # user.set_password("securepass123")
         user.password = "securepass123"
+        user1 = User(
+            username="testuser",
+            email="user@example.com",
+        )
+        # Make sure this matches your User model's method for setting passwords
+        # user.set_password("securepass123")
+        user1.password = "securepass123"
         db.session.add(user)
         db.session.commit()
         
@@ -433,6 +440,7 @@ def test_admin_user(app):
             email="admin@example.com",
             is_admin=True
         )
+        
         # user.set_password("adminpass123")
         user.password = "securepass123"
         db.session.add(user)
@@ -449,12 +457,12 @@ def test_workout(app, test_user):
     """Create a test workout for the test user."""
     with app.app_context():
         workout = Workout(
-            name="Test Workout",
+            title="Test Workout",
             description="Test workout description",
             workout_type="strength",
-            focus_area="upper body",
-            difficulty="beginner",
-            duration_minutes=30,
+            # focus_area="upper body",
+            # difficulty="beginner",
+            duration=30,
             user_id=test_user.id
         )
         db.session.add(workout)
@@ -464,7 +472,7 @@ def test_workout(app, test_user):
         assignment = WorkoutAssignment(
             user_id=test_user.id,
             workout_id=workout.id,
-            is_active=True,
+            # is_active=True,
             assigned_date=datetime.utcnow()
         )
         db.session.add(assignment)
@@ -488,3 +496,62 @@ def admin_auth_token(app, test_admin_user):
     """Create a valid access token for the admin user."""
     with app.app_context():
         return create_access_token(identity=test_admin_user.id)
+
+@pytest.fixture
+def auth_headers(auth_token):
+    """
+    Create HTTP headers with a valid authentication token.
+    
+    This fixture depends on the auth_token fixture and simply formats it
+    properly for use in HTTP Authorization header.
+    """
+    return {'Authorization': f'Bearer {auth_token}'}
+
+
+@pytest.fixture
+def admin_auth_headers(admin_auth_token):
+    """
+    Create HTTP headers with a valid admin authentication token.
+    
+    This fixture depends on the admin_auth_token fixture and formats it
+    properly for use in HTTP Authorization header.
+    """
+    return {'Authorization': f'Bearer {admin_auth_token}'}
+
+@pytest.fixture(scope='function')
+def database(app):
+    """
+    Create a fresh database for each test function.
+    
+    This fixture depends on the app fixture and provides a database session
+    that is reset after each test, ensuring test isolation.
+    """
+    # Set up: create tables and prepare session
+    with app.app_context():
+        # Create all tables
+        db.create_all()
+        
+        # Provide the session for the test
+        yield db
+        
+        # Tear down: clear session and drop all tables
+        db.session.remove()
+        db.drop_all()
+
+@pytest.fixture(scope='function')
+def init_database(app):
+    """
+    Initialize a fresh database for testing.
+    
+    This fixture sets up a clean database with tables and cleans up after tests.
+    """
+    with app.app_context():
+        # Create all tables
+        db.create_all()
+        
+        # Yield to allow tests to run
+        yield db
+        
+        # Clean up after the test
+        db.session.remove()
+        db.drop_all()
