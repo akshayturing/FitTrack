@@ -119,6 +119,11 @@ class User(db.Model):
     def password(self, password):
         """Set password to a hashed password."""
         self._password_hash = generate_password_hash(password)
+    def check_password(self, password):
+        """
+        Check if hashed password matches actual password
+        """
+        return check_password_hash(self.password_hash, password)
     @password.setter
     def set_password(self, password):
         """Set password to a hashed password."""

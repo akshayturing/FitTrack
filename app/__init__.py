@@ -6,6 +6,10 @@ from config import config
 from flask_marshmallow import Marshmallow
 from flask_login import LoginManager
 
+blacklisted_tokens = set()
+
+# if you need access elsewhere
+__all__ = ['blacklisted_tokens']
 ma = Marshmallow()
 # Initialize extensions
 db = SQLAlchemy()
@@ -53,7 +57,7 @@ def create_app(config_name='default'):
     app.register_blueprint(admin_bp, url_prefix='/admin')  # Add this
     app.register_blueprint(assignment_bp, url_prefix='/api/assignments')
     app.register_blueprint(session_log_bp, url_prefix='/api/session-logs')
-    app.register_blueprint(dashboard_bp)  # Register without prefix to include UI routes
+    # app.register_blueprint(dashboard_bp, url_prefix='/api/')  # Register without prefix to include UI routes
 
 
     return app

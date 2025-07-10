@@ -49,15 +49,6 @@ class Workout(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
-    # assignments = db.relationship('WorkoutAssignment', backref='assigned_workout', lazy='dynamic', cascade='all, delete-orphan')
-    
-    # Relationships
-    # exercises = db.relationship('WorkoutExercise', backref='workout', lazy='dynamic', cascade='all, delete-orphan')
-    # assignments = db.relationship('WorkoutAssignment', backref='workout', lazy='dynamic', cascade='all, delete-orphan')
-    # sessions = db.relationship('WorkoutSession', backref='workout', lazy='dynamic')
-    # Inside Workout
-    # user = db.relationship("User", back_populates="workouts")
-    # user = db.relationship('User', back_populates='workouts', foreign_keys=[created_by])
     user = db.relationship("User", back_populates="workouts", foreign_keys=[user_id])
     assignments = db.relationship(
         'WorkoutAssignment',
