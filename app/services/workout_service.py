@@ -54,3 +54,57 @@ class WorkoutService:
         db.session.delete(workout)
         db.session.commit()
         return True
+
+
+    # Add this method to your existing WorkoutService class
+    def get_public_workouts(self, filters=None):
+        """
+        Get all public workouts with optional filtering.
+        
+        Args:
+            filters (dict, optional): Dictionary containing filter parameters.
+                Possible filters:
+                - category: Filter by workout category
+                - difficulty_level: Filter by difficulty level
+                - duration: Filter by max duration in minutes
+                - search: Search in title and description
+                
+        Returns:
+            list: List of Workout objects matching the criteria
+        """
+        # Start with base query for public workouts
+        query = Workout.query.filter_by(is_public=True)
+        
+        # Apply filters if provided
+        if filters:
+            # Filter by category
+            if 'category' in filters and filters['category']:
+                query = query.filter(Workout.category == filters['category'])
+            
+            # Filter by difficulty level
+            if 'difficulty_level' in filters and filters['difficulty_level']:
+                query = query.filter(Workout.difficulty_level == filters['difficulty_level'])
+            
+            # Filter by duration (max duration)
+            if 'duration' in filters and filters['duration']:
+                try:
+                    max_duration = float(filters['duration'])
+                    query = query.filter(Workout.duration <= max_duration)
+                except (ValueError, TypeError):
+                    # If duration is not a valid number, ignore this filter
+                    pass
+                    
+            # Search in title and description
+            if 'search' in filters and filters['search']:
+                search_term = f"%{filters['search']}%"
+                query = query.filter(
+                    db.or_(
+                        Workout.title.ilike(search_term),
+                        Workout.description.ilike(search_term)
+                    )
+                )
+        
+        # Order by newest first
+        query = query.order_by(Workout.date.desc())
+        
+        return query.all()

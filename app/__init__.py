@@ -31,10 +31,12 @@ def create_app(config_name='default'):
     from app.routes.workout_routes import workout_bp
     from app.auth.auth_routes import auth_bp
     from app.routes.admin_routes import admin_bp 
+    from app.routes.assignment_routes import assignment_bp
     app.register_blueprint(user_bp, url_prefix='/api/users')
     app.register_blueprint(workout_bp, url_prefix='/api/workouts')
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(admin_bp, url_prefix='/admin')  # Add this
+    app.register_blueprint(assignment_bp, url_prefix='/api/assignments')
 
     return app
     # # Register blueprints

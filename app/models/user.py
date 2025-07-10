@@ -88,7 +88,15 @@ class User(db.Model):
     # workouts_created = db.relationship('Workout', backref='creator', foreign_keys='Workout.created_by', lazy='dynamic')
     #workout_assignments = db.relationship('WorkoutAssignment', foreign_keys='WorkoutAssignment.user_id', backref='assignee', lazy='dynamic')
     assigned_workouts = db.relationship('WorkoutAssignment', foreign_keys='WorkoutAssignment.assigned_by', back_populates='assigner')
-    assigned_to_me = db.relationship('WorkoutAssignment', foreign_keys='WorkoutAssignment.user_id', back_populates='user')
+    # assigned_to_me = db.relationship('WorkoutAssignment', foreign_keys='WorkoutAssignment.user_id', back_populates='user')
+    #assignments = db.relationship('WorkoutAssignment', backref='assigned_user', lazy='dynamic', cascade='all, delete-orphan')
+    assignments = db.relationship(
+        'WorkoutAssignment',
+        foreign_keys='WorkoutAssignment.user_id',
+        backref='assigned_user',
+        lazy='dynamic',
+        cascade='all, delete-orphan'
+    )
     workout_sessions = db.relationship('WorkoutSession', backref='user', lazy='dynamic')
     nutrition_logs = db.relationship('NutritionLog', backref='user', lazy='dynamic', cascade='all, delete-orphan')
     nutrition_profile = db.relationship('NutritionProfile', backref='user', uselist=False, cascade='all, delete-orphan')

@@ -57,7 +57,8 @@ class WorkoutAssignment(db.Model):
     __tablename__ = 'workout_assignments'
     __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False, index=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    # user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False, index=True)
     workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id', ondelete='CASCADE'), nullable=False, index=True)
     assigned_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     assigned_by = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='SET NULL'), nullable=True, index=True)
@@ -67,6 +68,10 @@ class WorkoutAssignment(db.Model):
     frequency = db.Column(db.String(50), nullable=True)  # e.g., "Mon,Wed,Fri" or "2,4,6"
     priority = db.Column(db.Integer, default=1)  # Higher number = higher priority
     notes = db.Column(db.Text, nullable=True)
+    assigned_date = db.Column(db.DateTime, default=datetime.utcnow)
+    completed = db.Column(db.Boolean, default=False)
+    completion_date = db.Column(db.DateTime)
+    
     
     __table_args__ = (
         # Enforce uniqueness for user and workout combination
@@ -84,7 +89,7 @@ class WorkoutAssignment(db.Model):
     # user = db.relationship('User', foreign_keys=[user_id], backref='assigned_to_me')
     
     assigner = db.relationship('User', foreign_keys=[assigned_by], back_populates='assigned_workouts')
-    user = db.relationship('User', foreign_keys=[user_id], back_populates='assigned_to_me')
+    # user = db.relationship('User', foreign_keys=[user_id], back_populates='assigned_to_me')
     def to_dict(self, include_workout=False):
         result = {
             'id': self.id,
@@ -97,7 +102,10 @@ class WorkoutAssignment(db.Model):
             'status': self.status,
             'frequency': self.frequency,
             'priority': self.priority,
-            'notes': self.notes
+            'notes': self.notes,
+            'assigned_date': self.assigned_date.isoformat() if self.assigned_date else None,
+            'completed': self.completed,
+            'completion_date': self.completion_date.isoformat() if self.completion_date else None
         }
         
         if include_workout and hasattr(self, 'workout'):
