@@ -6,6 +6,7 @@ from config import config
 
 # Initialize extensions
 db = SQLAlchemy()
+
 migrate = Migrate()
 
 def create_app(config_name='default'):
@@ -15,7 +16,12 @@ def create_app(config_name='default'):
     
     # Initialize extensions with app
     db.init_app(app)
+    # db.engine.execute("DROP TABLE IF EXISTS _alembic_tmp_set_logs;")
     migrate.init_app(app, db)
+    
+    # Create tables within application context if they don't exist
+    with app.app_context():
+        db.create_all()
     
     # Register blueprints
     from app.routes.user_routes import user_bp
