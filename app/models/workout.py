@@ -34,10 +34,11 @@ from datetime import datetime
 
 class Workout(db.Model):
     __tablename__ = 'workouts'
-    
+    __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     category = db.Column(db.String(50), nullable=True)
+    workout_type = db.Column(db.String(50), nullable=True)
     description = db.Column(db.Text, nullable=True)
     difficulty_level = db.Column(db.String(20), nullable=True)  # beginner, intermediate, advanced
     estimated_duration = db.Column(db.Integer, nullable=True)  # in minutes
@@ -46,12 +47,22 @@ class Workout(db.Model):
     image_url = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     # Relationships
     # exercises = db.relationship('WorkoutExercise', backref='workout', lazy='dynamic', cascade='all, delete-orphan')
     # assignments = db.relationship('WorkoutAssignment', backref='workout', lazy='dynamic', cascade='all, delete-orphan')
     # sessions = db.relationship('WorkoutSession', backref='workout', lazy='dynamic')
-    
+    # Inside Workout
+    # user = db.relationship("User", back_populates="workouts")
+    # user = db.relationship('User', back_populates='workouts', foreign_keys=[created_by])
+    user = db.relationship("User", back_populates="workouts", foreign_keys=[user_id])
+    workout_exercises = db.relationship(
+        "WorkoutExercise",
+        back_populates="workout",
+        cascade="all, delete-orphan",
+        order_by="WorkoutExercise.position"
+    )
+    # created_by = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     def to_dict(self, include_exercises=False):
         result = {
             'id': self.id,

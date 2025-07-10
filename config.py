@@ -6,7 +6,8 @@ class Config:
     """Base configuration."""
     SECRET_KEY = os.getenv('SECRET_KEY', 'dev-key-please-change-in-production')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    
+    ADMIN_API_KEY = os.getenv('ADMIN_API_KEY', 'admin-secret-key')
+
     # JWT Configuration
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'jwt-secret-key-change-in-production')
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)
@@ -22,7 +23,7 @@ class DevelopmentConfig(Config):
     """Development configuration."""
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.getenv('DEV_DATABASE_URL', 'sqlite:///fittrack-dev.db')
-
+    
 class TestingConfig(Config):
     """Testing configuration."""
     TESTING = True

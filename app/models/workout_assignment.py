@@ -55,7 +55,7 @@ from datetime import datetime
 
 class WorkoutAssignment(db.Model):
     __tablename__ = 'workout_assignments'
-    
+    __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False, index=True)
     workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id', ondelete='CASCADE'), nullable=False, index=True)

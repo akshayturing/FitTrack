@@ -65,9 +65,9 @@ from datetime import datetime, timezone
 
 class User(db.Model):
     __tablename__ = 'users'
-    
+    __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String(100), nullable=False, default="User")
     username = db.Column(db.String(64), unique=True, nullable=False, index=True)
     email = db.Column(db.String(120), unique=True, nullable=False, index=True)
     _password_hash = db.Column(db.String(128), nullable=False)
@@ -85,18 +85,20 @@ class User(db.Model):
     height = db.Column(db.Float, nullable=True)          # in cm
     
     # Relationships
-    workouts_created = db.relationship('Workout', backref='creator', foreign_keys='Workout.created_by', lazy='dynamic')
+    # workouts_created = db.relationship('Workout', backref='creator', foreign_keys='Workout.created_by', lazy='dynamic')
     #workout_assignments = db.relationship('WorkoutAssignment', foreign_keys='WorkoutAssignment.user_id', backref='assignee', lazy='dynamic')
     assigned_workouts = db.relationship('WorkoutAssignment', foreign_keys='WorkoutAssignment.assigned_by', back_populates='assigner')
     assigned_to_me = db.relationship('WorkoutAssignment', foreign_keys='WorkoutAssignment.user_id', back_populates='user')
     workout_sessions = db.relationship('WorkoutSession', backref='user', lazy='dynamic')
     nutrition_logs = db.relationship('NutritionLog', backref='user', lazy='dynamic', cascade='all, delete-orphan')
     nutrition_profile = db.relationship('NutritionProfile', backref='user', uselist=False, cascade='all, delete-orphan')
-    
-    __table_args__ = (
-        db.Index('idx_user_email_username', 'email', 'username'),  # Composite index for login queries
-    )
-    
+    # workouts = db.relationship("Workout", back_populates="user", cascade="all, delete-orphan")
+    # __table_args__ = (
+    #     db.Index('idx_user_email_username', 'email', 'username'),  # Composite index for login queries
+    # )
+    # workouts = db.relationship('Workout', back_populates='user', foreign_keys='Workout.created_by')
+    workouts = db.relationship("Workout", back_populates="user", foreign_keys="Workout.user_id")
+
     @property
     def password(self):
         """Prevent password from being accessed."""
