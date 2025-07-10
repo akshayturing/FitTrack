@@ -1,14 +1,22 @@
 # app/services/user_service.py
 from app.models.user import User
 from app import db
-
+from flask import jsonify
 class UserService:
+    
     def create_user(self, user_data):
         """Create a new user."""
+        required_fields = ['username', 'email', 'password']
+        for field in required_fields:
+            if not user_data.get(field):
+                return jsonify({"error": f"{field} is required"}), 400
+        print(user_data)
         username = user_data.get('username')
         email = user_data.get('email')
         password = user_data.get('password')
-        
+        print("************************")
+        print(username, email, password, user_data.get('name'))
+        print("************************")
         if not username or not email or not password:
             raise ValueError('Username, email, and password are required')
         
@@ -19,21 +27,27 @@ class UserService:
         if User.query.filter_by(email=email).first():
             raise ValueError(f'Email {email} is already registered')
         
-        user = User(username=username, email=email)
+        user = User(name=user_data.get('name'), username=username, email=email)
         user.password = password  # This will trigger the password setter to hash it
-        
+    
         db.session.add(user)
         db.session.commit()
         
-        return user
+        tokens = user.generate_tokens()
+        print("*****************")
+        print(user)
+        print("****************")
+        return user, tokens
     
     def get_user_by_id(self, user_id):
         """Get user by ID."""
-        return User.query.get(user_id)
-    
+        return db.session.get(User, user_id)
+        # return User.query.get(user_id)
+
     def update_user(self, user_id, user_data):
         """Update user information."""
-        user = User.query.get(user_id)
+        # user = User.query.get(user_id)
+        user = db.session.get(User, user_id)
         if not user:
             return None
         
@@ -58,7 +72,8 @@ class UserService:
     
     def delete_user(self, user_id):
         """Delete a user."""
-        user = User.query.get(user_id)
+        # user = User.query.get(user_id)
+        user= db.session.get(User, user_id)
         if not user:
             return False
         
