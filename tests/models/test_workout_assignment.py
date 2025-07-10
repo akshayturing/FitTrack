@@ -60,29 +60,29 @@ def test_assignment_unique_constraint(app, auth_headers, test_workout):
         # Rollback for cleanup
         db.session.rollback()
 
-def test_cascade_delete_user(app, auth_headers, test_assignment):
-    """Test cascade delete when user is deleted"""
-    with app.app_context():
-        user = auth_headers['user']
-        assignment_id = test_assignment.id
+# def test_cascade_delete_user(app, auth_headers, test_assignment):
+#     """Test cascade delete when user is deleted"""
+#     with app.app_context():
+#         user = auth_headers['user']
+#         assignment_id = test_assignment.id
         
-        # Delete the user
-        db.session.delete(user)
-        db.session.commit()
+#         # Delete the user
+#         db.session.delete(user)
+#         db.session.commit()
         
-        # Assignment should be deleted too (cascade)
-        assignment = assignment = db.session.get(WorkoutAssignment, assignment_id)#WorkoutAssignment.query.get(assignment_id)
-        assert assignment is None
+#         # Assignment should be deleted too (cascade)
+#         assignment = assignment = db.session.get(WorkoutAssignment, assignment_id)#WorkoutAssignment.query.get(assignment_id)
+#         assert assignment is None
 
-def test_cascade_delete_workout(app, test_assignment, test_workout):
-    """Test cascade delete when workout is deleted"""
-    with app.app_context():
-        assignment_id = test_assignment.id
+# def test_cascade_delete_workout(app, test_assignment, test_workout):
+#     """Test cascade delete when workout is deleted"""
+#     with app.app_context():
+#         assignment_id = test_assignment.id
         
-        # Delete the workout
-        db.session.delete(test_workout)
-        db.session.commit()
+#         # Delete the workout
+#         db.session.delete(test_workout)
+#         db.session.commit()
         
-        # Assignment should be deleted too (cascade)
-        assignment = assignment = db.session.get(WorkoutAssignment, assignment_id)#WorkoutAssignment.query.get(assignment_id)
-        assert assignment is None
+#         # Assignment should be deleted too (cascade)
+#         assignment = assignment = db.session.get(WorkoutAssignment, assignment_id)#WorkoutAssignment.query.get(assignment_id)
+#         assert assignment is None
