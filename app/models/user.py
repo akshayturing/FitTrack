@@ -62,6 +62,7 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token, create_refresh_token
 from datetime import datetime, timezone
+from app import db, login_manager
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -74,6 +75,7 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     last_login = db.Column(db.DateTime, nullable=True)
     profile_image = db.Column(db.String(255), nullable=True)
+    is_admin = db.Column(db.Boolean, default=False)  # Add this line
     
     # Nutrition fields
     calorie_goal = db.Column(db.Integer, nullable=True)
@@ -115,6 +117,10 @@ class User(db.Model):
         
     @password.setter
     def password(self, password):
+        """Set password to a hashed password."""
+        self._password_hash = generate_password_hash(password)
+    @password.setter
+    def set_password(self, password):
         """Set password to a hashed password."""
         self._password_hash = generate_password_hash(password)
         
@@ -170,3 +176,9 @@ class User(db.Model):
     def get_user_by_email(cls, email):
         """Get a user by email"""
         return cls.query.filter_by(email=email).first()
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        """User loader function for Flask-Login"""
+        return User.query.get(int(user_id))
+    

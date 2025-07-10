@@ -4,12 +4,14 @@ from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from config import config
 from flask_marshmallow import Marshmallow
+from flask_login import LoginManager
 
 ma = Marshmallow()
 # Initialize extensions
 db = SQLAlchemy()
 migrate = Migrate()
 jwt = JWTManager()
+login_manager = LoginManager()
 
 def create_app(config_name='default'):
     """Application factory function"""
@@ -22,12 +24,19 @@ def create_app(config_name='default'):
     jwt.init_app(app)
     ma.init_app(app)
 
+    # Setup LoginManager
+    login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'  # Specify the login view route
+    login_manager.login_message = 'Please log in to access this page'
+    login_manager.login_message_category = 'info'
+    
     # Create tables within application context if they don't exist
     with app.app_context():
         db.create_all()
         # Set up JWT error handlers and callbacks
     from app.auth.jwt_callbacks import register_jwt_callbacks
     register_jwt_callbacks(jwt)
+    
     
     # Register blueprints
     from app.routes.user_routes import user_bp
@@ -36,6 +45,7 @@ def create_app(config_name='default'):
     from app.routes.admin_routes import admin_bp 
     from app.routes.assignment_routes import assignment_bp
     from app.routes.session_log_routes import session_log_bp
+    from app.routes.dashboard_routes import dashboard_bp  # Import dashboard blueprint
 
     app.register_blueprint(user_bp, url_prefix='/api/users')
     app.register_blueprint(workout_bp, url_prefix='/api/workouts')
@@ -43,6 +53,7 @@ def create_app(config_name='default'):
     app.register_blueprint(admin_bp, url_prefix='/admin')  # Add this
     app.register_blueprint(assignment_bp, url_prefix='/api/assignments')
     app.register_blueprint(session_log_bp, url_prefix='/api/session-logs')
+    app.register_blueprint(dashboard_bp)  # Register without prefix to include UI routes
 
 
     return app

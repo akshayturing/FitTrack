@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="user-id" content="{{ user.id }}">
+<title>
+Your Workouts - FitTrack
+
+</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Component CSS -->
+<link href="{{ url_for('static', filename='css/components/cards.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/components/badges.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/components/filters.css') }}" rel="stylesheet">
+<!-- Page CSS -->
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+</head>
+<body>
+<div>
+<h1>
+Your Workout Dashboard
+
+</h1>
+    <!-- Filters Section - Include from partial template -->
+    {% include 'dashboard/_filters.html' %}
+    
+    <!-- Workout List -->
+    <div id="workoutList" class="row">
+        <!-- Workouts will be loaded here dynamically -->
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Application scripts -->
+<script src="{{ url_for('static', filename='js/dashboard/utils.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dashboard/api.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dashboard/ui-states.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dashboard/filters.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dashboard/workout-cards.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dashboard-main.js') }}"></script>
+</body>
+</html>
+
+### Filter Partial (`templates/dashboard/_filters.html`):
+
+```html
+<!-- Filters and Search -->
+<div class="filter-container">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-search">
+</i>
+</span>
+<i>
+        </div>
+    </div>
+<div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+<select>
+<option>
+All Focus Areas
+
+</option>
+<option>
+Strength
+
+</option>
+<option>
+Cardio
+
+</option>
+<option>
+Flexibility
+
+</option>
+<option>
+HIIT
+
+</option>
+<option>
+Full Body
+
+</option>
+</select>
+</div>
+<div>
+<select>
+<option>
+All Difficulties
+
+</option>
+<option>
+Beginner
+
+</option>
+<option>
+Intermediate
+
+</option>
+<option>
+Advanced
+
+</option>
+</select>
+</div>
+<div>
+<select>
+<option>
+All Durations
+
+</option>
+<option>
+Under 15 min
+
+</option>
+<option>
+15-30 min
+
+</option>
+<option>
+30-60 min
+
+</option>
+<option>
+Over 60 min
+
+</option>
+</select>
+</div>
+        </div>
+    </div>
+</div>
+</div>

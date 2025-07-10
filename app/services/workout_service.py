@@ -2,7 +2,9 @@
 from app.models.workout import Workout
 from app.models.user import User
 from app import db
-
+from app.models.workout_assignment import WorkoutAssignment
+import app
+from sqlalchemy.exc import SQLAlchemyError
 class WorkoutService:
     def create_workout(self, workout_data):
         """Create a new workout."""
@@ -54,7 +56,6 @@ class WorkoutService:
         db.session.delete(workout)
         db.session.commit()
         return True
-
 
     # Add this method to your existing WorkoutService class
     def get_public_workouts(self, filters=None):
@@ -108,3 +109,55 @@ class WorkoutService:
         query = query.order_by(Workout.date.desc())
         
         return query.all()
+    
+    @staticmethod
+    def get_user_assigned_workouts(user_id):
+        """
+        Get all workouts assigned to a specific user
+        
+        Args:
+            user_id (int): ID of the user
+        
+        Returns:
+            list: List of Workout objects
+            
+        Raises:
+            SQLAlchemyError: If database error occurs
+        """
+        try:
+            # Get all workout assignments for the user
+            assignments = WorkoutAssignment.query.filter_by(
+                user_id=user_id, 
+                is_active=True
+            ).all()
+            
+            # Extract workout IDs from assignments
+            workout_ids = [assignment.workout_id for assignment in assignments]
+            
+            if not workout_ids:
+                return []
+                
+            # Get all relevant workouts
+            return Workout.query.filter(Workout.id.in_(workout_ids)).all()
+        except SQLAlchemyError as e:
+            raise
+    
+    @staticmethod
+    def is_workout_assigned_to_user(user_id, workout_id):
+        """
+        Check if a workout is assigned to a user
+        
+        Args:
+            user_id (int): ID of the user
+            workout_id (int): ID of the workout
+            
+        Returns:
+            bool: True if workout is assigned to user, False otherwise
+        """
+        assignment = WorkoutAssignment.query.filter_by(
+            user_id=user_id,
+            workout_id=workout_id,
+            is_active=True
+        ).first()
+        
+        return assignment is not None
