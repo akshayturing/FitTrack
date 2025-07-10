@@ -1,5 +1,6 @@
 # FitTrack
 
+
 ## Introduction
 FitTrack is a personalized fitness tracking application that empowers users to take control of their workout routines. The platform allows administrators or fitness professionals to define reusable workout templates consisting of exercises, which users can browse and select. Once a workout is chosen, users can log their daily progress by specifying the number of sets, repetitions, and weights for each exercise — tagged with a specific date. The backend will be implemented using Flask, exposing secure RESTful APIs with proper relational database models and token-based authentication. The frontend (potentially using React) will offer an intuitive interface for registration, login, workout selection, session entry, and progress tracking. The project architecture emphasizes modularity, scalability, and data integrity, with room to integrate analytics and adaptive training recommendations in the future.
 ## Conversations
